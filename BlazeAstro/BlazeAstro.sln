@@ -9,17 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B597C30B-AC8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B0EED960-CDF9-464B-9936-DD3AF3B89936}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Services.Models", "Services\BlazeAstro.Services.Models\BlazeAstro.Services.Models.csproj", "{FE8AFAFB-E3B4-4E73-870B-0209EE9185F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Services.Models", "Services\BlazeAstro.Services.Models\BlazeAstro.Services.Models.csproj", "{FE8AFAFB-E3B4-4E73-870B-0209EE9185F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Services.DataProviders", "Services\BlazeAstro.Services.DataProviders\BlazeAstro.Services.DataProviders.csproj", "{F996F94A-5178-489C-9B53-FCAF10930EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Services.DataProviders", "Services\BlazeAstro.Services.DataProviders\BlazeAstro.Services.DataProviders.csproj", "{F996F94A-5178-489C-9B53-FCAF10930EF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{CF4A2F03-E37E-4F2A-96A5-EC5FC2EBE547}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Web.Client", "Web\BlazeAstro.Web.Client\BlazeAstro.Web.Client.csproj", "{F333CAD0-71F0-46B4-90EE-8B9D0A56090A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Shared", "Web\BlazeAstro.Web.Shared\BlazeAstro.Web.Shared.csproj", "{13487058-3196-4FAF-B769-7D57C3092ECF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Web.Api", "Web\BlazeAstro.Web.Api\BlazeAstro.Web.Api.csproj", "{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Server", "Web\BlazeAstro.Web.Server\BlazeAstro.Web.Server.csproj", "{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Web.Models", "Web\BlazeAstro.Web.Models\BlazeAstro.Web.Models.csproj", "{27FBE850-595F-434B-B149-4EF756C0B734}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Client", "Web\BlazeAstro.Web.Client\BlazeAstro.Web.Client.csproj", "{00EC6CFC-E81A-45C6-BD86-6217A289D9F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +35,18 @@ Global
 		{F996F94A-5178-489C-9B53-FCAF10930EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F996F94A-5178-489C-9B53-FCAF10930EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F996F94A-5178-489C-9B53-FCAF10930EF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F333CAD0-71F0-46B4-90EE-8B9D0A56090A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F333CAD0-71F0-46B4-90EE-8B9D0A56090A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F333CAD0-71F0-46B4-90EE-8B9D0A56090A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F333CAD0-71F0-46B4-90EE-8B9D0A56090A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27FBE850-595F-434B-B149-4EF756C0B734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27FBE850-595F-434B-B149-4EF756C0B734}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27FBE850-595F-434B-B149-4EF756C0B734}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27FBE850-595F-434B-B149-4EF756C0B734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13487058-3196-4FAF-B769-7D57C3092ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13487058-3196-4FAF-B769-7D57C3092ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13487058-3196-4FAF-B769-7D57C3092ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13487058-3196-4FAF-B769-7D57C3092ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00EC6CFC-E81A-45C6-BD86-6217A289D9F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00EC6CFC-E81A-45C6-BD86-6217A289D9F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00EC6CFC-E81A-45C6-BD86-6217A289D9F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00EC6CFC-E81A-45C6-BD86-6217A289D9F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,9 +54,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{FE8AFAFB-E3B4-4E73-870B-0209EE9185F5} = {B0EED960-CDF9-464B-9936-DD3AF3B89936}
 		{F996F94A-5178-489C-9B53-FCAF10930EF1} = {B0EED960-CDF9-464B-9936-DD3AF3B89936}
-		{F333CAD0-71F0-46B4-90EE-8B9D0A56090A} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
-		{A189ABCB-AA6D-4AC8-92CC-25C79B51D0D8} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
-		{27FBE850-595F-434B-B149-4EF756C0B734} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
+		{13487058-3196-4FAF-B769-7D57C3092ECF} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
+		{DC74EF95-DDA1-4C5A-83E5-009102C3DB4A} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
+		{00EC6CFC-E81A-45C6-BD86-6217A289D9F1} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF6853F-9693-42A4-AB37-6094E3D6C73C}
