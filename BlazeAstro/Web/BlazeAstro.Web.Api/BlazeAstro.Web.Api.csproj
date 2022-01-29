@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\BlazeAstro.Services.DataProviders\BlazeAstro.Services.DataProviders.csproj" />
+    <ProjectReference Include="..\..\Services\BlazeAstro.Services.Models\BlazeAstro.Services.Models.csproj" />
     <ProjectReference Include="..\BlazeAstro.Web.Client\BlazeAstro.Web.Client.csproj" />
     <ProjectReference Include="..\BlazeAstro.Web.Models\BlazeAstro.Web.Models.csproj" />
   </ItemGroup>

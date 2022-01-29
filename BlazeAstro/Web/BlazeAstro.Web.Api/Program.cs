@@ -1,3 +1,6 @@
+using BlazeAstro.Services.DataProviders;
+using BlazeAstro.Services.DataProviders.Contracts;
+using BlazeAstro.Services.Models.Apod;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddSingleton(new HttpClient());
+builder.Services.AddTransient<IDataProvider<ApodRequestModel, ApodResponseModel>, ApodDataProvider>();
 
 var app = builder.Build();
 
@@ -34,3 +40,4 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
+
