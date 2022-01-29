@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlazeAstro.Web.Shared\BlazeAstro.Web.Shared.csproj" />
+    <ProjectReference Include="..\BlazeAstro.Web.Models\BlazeAstro.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>
