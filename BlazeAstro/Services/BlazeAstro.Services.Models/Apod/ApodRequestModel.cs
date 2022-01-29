@@ -19,5 +19,8 @@
 
         [JsonPropertyName("thumbs")]
         public bool Thumbs { get; set; }
+
+        [JsonPropertyName("count")]
+        public int Count { get; set; }
     }
 }
