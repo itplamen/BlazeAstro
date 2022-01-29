@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Client", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Api", "Web\BlazeAstro.Web.Api\BlazeAstro.Web.Api.csproj", "{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Infrastructure.Mapping", "Infrastructure\BlazeAstro.Infrastructure.Mapping\BlazeAstro.Infrastructure.Mapping.csproj", "{39240035-BA42-4243-984F-51CB72DCBBD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39240035-BA42-4243-984F-51CB72DCBBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39240035-BA42-4243-984F-51CB72DCBBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39240035-BA42-4243-984F-51CB72DCBBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39240035-BA42-4243-984F-51CB72DCBBD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{0C1BB559-8895-4B04-967D-48007E64197E} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 		{5A00D174-096A-4143-83B4-0468B282A717} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 		{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
+		{39240035-BA42-4243-984F-51CB72DCBBD0} = {CF4A2F03-E37E-4F2A-96A5-EC5FC2EBE547}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF6853F-9693-42A4-AB37-6094E3D6C73C}
