@@ -4,6 +4,7 @@ using BlazeAstro.Infrastructure.Mapping;
 using BlazeAstro.Services.DataProviders;
 using BlazeAstro.Services.DataProviders.Contracts;
 using BlazeAstro.Services.Models.Apod;
+using BlazeAstro.Services.Models.Astronauts;
 using BlazeAstro.Web.Shared.Models.Apod;
 using BlazeAstro.Web.Shared.Validations.Apod;
 
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IApodRequestValidation, ApodCountRequestValidation>()
 
 builder.Services.AddSingleton(new HttpClient());
 builder.Services.AddTransient<IDataProvider<ApodRequestModel, IEnumerable<ApodResponseModel>>, ApodDataProvider>();
+builder.Services.AddTransient<IDataProvider<AstronautsResponseModel>, AstronautsDataProvider>();
 
 var app = builder.Build();
 

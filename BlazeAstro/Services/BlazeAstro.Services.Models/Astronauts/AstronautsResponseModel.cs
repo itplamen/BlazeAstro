@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class AstronautsInSpaceResponseModel
+    public class AstronautsResponseModel
     {
         [JsonPropertyName("people")]
         public IEnumerable<AstronautResponseModel> Astronauts { get; set; }
