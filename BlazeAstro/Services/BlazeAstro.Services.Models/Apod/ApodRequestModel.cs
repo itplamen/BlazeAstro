@@ -1,6 +1,5 @@
 ﻿namespace BlazeAstro.Services.Models.Apod
 {
-    using System;
     using System.Text.Json.Serialization;
 
     public class ApodRequestModel
@@ -9,13 +8,13 @@
         public string ApiKey { get; set; }
 
         [JsonPropertyName("date")]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         [JsonPropertyName("start_date")]
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
 
         [JsonPropertyName("end_date")]
-        public DateTime EndDate { get; set; }
+        public string EndDate { get; set; }
 
         [JsonPropertyName("thumbs")]
         public bool Thumbs { get; set; }
