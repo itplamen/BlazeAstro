@@ -1,7 +1,11 @@
+using System.Reflection;
+
+using BlazeAstro.Infrastructure.Mapping;
 using BlazeAstro.Services.DataProviders;
 using BlazeAstro.Services.DataProviders.Contracts;
 using BlazeAstro.Services.Models.Apod;
-using Microsoft.AspNetCore.ResponseCompression;
+using BlazeAstro.Web.Shared.Models.Apod;
+using BlazeAstro.Web.Shared.Validations.Apod;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddAutoMapper((_, config) => 
+    config.AddProfile(new MappingProfile(typeof(ApodInputModel).GetTypeInfo().Assembly)), 
+    Array.Empty<Assembly>());
+
+builder.Services.AddScoped<IApodRequestValidation, ApodDateRequestValidation>();
+builder.Services.AddScoped<IApodRequestValidation, ApodDateRangesRequestValidation>();
+builder.Services.AddScoped<IApodRequestValidation, ApodCountRequestValidation>();
+
 builder.Services.AddSingleton(new HttpClient());
-builder.Services.AddTransient<IDataProvider<ApodRequestModel, ApodResponseModel>, ApodDataProvider>();
+builder.Services.AddTransient<IDataProvider<ApodRequestModel, IEnumerable<ApodResponseModel>>, ApodDataProvider>();
 
 var app = builder.Build();
 
@@ -40,4 +52,3 @@ app.MapControllers();
 app.MapFallbackToFile("index.html");
 
 app.Run();
-
