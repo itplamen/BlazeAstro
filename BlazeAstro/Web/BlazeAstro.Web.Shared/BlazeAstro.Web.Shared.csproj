@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Validations\Apod\ApodCountRequestValidation.cs~RF3f4e8cf.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\BlazeAstro.Infrastructure.Mapping\BlazeAstro.Infrastructure.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\BlazeAstro.Services.Models\BlazeAstro.Services.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>
