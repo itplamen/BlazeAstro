@@ -1,8 +1,8 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-
-namespace BlazeAstro.Services.Models.Apod
+﻿namespace BlazeAstro.Services.Models.Apod
 {
+    using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MediaType
     {

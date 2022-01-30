@@ -1,4 +1,4 @@
-﻿namespace BlazeAstro.Web.Models.Apod
+﻿namespace BlazeAstro.Web.Shared.Models.Apod
 {
     using System;
 
