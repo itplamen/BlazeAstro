@@ -1,5 +1,7 @@
 using System.Reflection;
 
+using Microsoft.Extensions.Caching.Distributed;
+
 using BlazeAstro.Infrastructure.Mapping;
 using BlazeAstro.Services.DataProviders;
 using BlazeAstro.Services.DataProviders.Contracts;
@@ -26,6 +28,12 @@ builder.Services.AddScoped<IApodRequestValidation, ApodCountRequestValidation>()
 builder.Services.AddSingleton(new HttpClient());
 builder.Services.AddTransient<IDataProvider<ApodRequestModel, IEnumerable<ApodResponseModel>>, ApodDataProvider>();
 builder.Services.AddTransient<IDataProvider<AstronautsResponseModel>, AstronautsDataProvider>();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.InstanceName = "BlazeAstro";
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
 
 var app = builder.Build();
 
