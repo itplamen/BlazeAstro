@@ -13,18 +13,22 @@
     public class AstronautsController : ControllerBase
     {
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
         private readonly IDataProvider<AstronautsRequestModel, AstronautsResponseModel> dataProvider;
 
-        public AstronautsController(IMapper mapper, IDataProvider<AstronautsRequestModel, AstronautsResponseModel> dataProvider)
+        public AstronautsController(IMapper mapper, IConfiguration configuration, IDataProvider<AstronautsRequestModel, AstronautsResponseModel> dataProvider)
         {
             this.mapper = mapper;
+            this.configuration = configuration;
             this.dataProvider = dataProvider;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AstronautsOutputModel>>> Get()
         {
-            var response = await dataProvider.GetData(new AstronautsRequestModel());
+            var request = new AstronautsRequestModel() { Url = configuration["API:AstronautsInSpace:Url"] };
+            
+            var response = await dataProvider.GetData(request);
             var output = mapper.Map<AstronautsOutputModel>(response);
 
             return Ok(output);
