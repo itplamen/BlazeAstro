@@ -1,8 +1,9 @@
 ﻿namespace BlazeAstro.Services.DataProviders
 {
     using System.Net.Http;
-    using System.Net.Http.Json;
     using System.Threading.Tasks;
+
+    using Newtonsoft.Json;
 
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.Astronauts;
@@ -18,9 +19,11 @@
 
         public async Task<AstronautsResponseModel> GetData(AstronautsRequestModel request)
         {
-            var response = await httpClient.GetFromJsonAsync<AstronautsResponseModel>(request.Url);
+            var response = await httpClient.GetAsync(request.Url);
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<AstronautsResponseModel>(content);
 
-            return response; ;
+            return result;
         }
     }
 }

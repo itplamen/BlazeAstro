@@ -3,10 +3,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
-    using System.Net.Http.Json;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.WebUtilities;
+
+    using Newtonsoft.Json;
 
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.MarsPhotos;
@@ -34,9 +35,12 @@
             }
 
             string url = QueryHelpers.AddQueryString($"{request.Url}/{request.RoverName}/photos", queryString);
-            var response = await httpClient.GetFromJsonAsync<MarsPhotosResponseModel>(url);
+            var response = await httpClient.GetAsync(url);
 
-            return response;
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<MarsPhotosResponseModel>(content);
+
+            return result;
         }
     }
 }

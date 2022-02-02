@@ -1,10 +1,11 @@
 ﻿namespace BlazeAstro.Services.DataProviders
 {
     using System;
-    using System.Text.Json;
     using System.Threading.Tasks;
 
     using Microsoft.Extensions.Caching.Distributed;
+
+    using Newtonsoft.Json;
 
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.Contracts;
@@ -33,13 +34,13 @@
             {
                 var response = await decorated.GetData(request);
 
-                var cacheData = JsonSerializer.Serialize(response);
+                var cacheData = JsonConvert.SerializeObject(response);
                 await cache.SetStringAsync(request.CacheKey, cacheData, options);
 
                 return response;
             }
 
-            var cachedData = JsonSerializer.Deserialize<TResponse>(json);
+            var cachedData = JsonConvert.DeserializeObject<TResponse>(json);
 
             return cachedData;
         }
