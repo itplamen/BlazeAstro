@@ -62,3 +62,24 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.country-flag {
+    display: inline;
+}
+
+.card-body .profile-img, .card-body .profile-img img {
+    width: 200px;
+    height: 200px;
+}
+
+.card-body .title {
+    display: inline-block;
+}
+
+.card-body .biography {
+    height: 50px; 
+}
+
+.card-body .biolink {
+    margin-right: 5px;
+}

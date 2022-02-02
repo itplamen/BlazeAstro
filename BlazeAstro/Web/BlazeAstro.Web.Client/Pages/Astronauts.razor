@@ -1,0 +1,45 @@
+﻿@page "/astronauts"
+
+@inject HttpClient HttpClient 
+
+<h3>Astronauts in Space</h3>
+<p>The number of people in space at this moment @(outputModel != null ? $" is {outputModel.Number} " : "")</p>
+
+@if (outputModel != null)
+{
+    <div class="row">
+        @foreach (var astronaut in outputModel.Astronauts)
+        {
+            <div class="card col-3">
+                <div class="card-body">
+                    <div class="profile-img" ><img src="@astronaut.ImgUrl" alt="Astronaut Image" /></div>
+                    <h2 class="card-title">@astronaut.Name</h2>
+                    <img class="country-flag" src="@astronaut.CountryFlagUrl" width="40" height="20" alt="@astronaut.Country" />
+                    <h5 class="card-text title">@astronaut.Title</h5>
+                    <p class="card-text">@astronaut.Location</p>
+                    <p class="card-text biography">@astronaut.Biography</p>
+                    
+                    @if (!string.IsNullOrEmpty(astronaut.Wikipedia))
+                    {
+                        <a href="@astronaut.Wikipedia" class="btn btn-light biolink" target="_blank">Wikipedia</a>
+                    }
+
+                    @if (!string.IsNullOrEmpty(astronaut.Twitter))
+                    {
+                        <a href="@astronaut.Twitter" class="btn btn-light biolink" target="_blank">Twitter</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    AstronautsOutputModel outputModel;
+
+    protected override async Task OnInitializedAsync()
+    {
+        outputModel = await HttpClient.GetFromJsonAsync<AstronautsOutputModel>("api/astronauts");
+    }
+
+}
