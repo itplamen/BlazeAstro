@@ -13,9 +13,9 @@
     public class AstronautsController : ControllerBase
     {
         private readonly IMapper mapper;
-        private readonly IDataProvider<AstronautsResponseModel> dataProvider;
+        private readonly IDataProvider<AstronautsRequestModel, AstronautsResponseModel> dataProvider;
 
-        public AstronautsController(IMapper mapper, IDataProvider<AstronautsResponseModel> dataProvider)
+        public AstronautsController(IMapper mapper, IDataProvider<AstronautsRequestModel, AstronautsResponseModel> dataProvider)
         {
             this.mapper = mapper;
             this.dataProvider = dataProvider;
@@ -24,7 +24,7 @@
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AstronautsOutputModel>>> Get()
         {
-            var response = await dataProvider.GetData();
+            var response = await dataProvider.GetData(new AstronautsRequestModel());
             var output = mapper.Map<AstronautsOutputModel>(response);
 
             return Ok(output);
