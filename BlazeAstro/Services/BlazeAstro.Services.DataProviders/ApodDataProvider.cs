@@ -15,8 +15,6 @@
 
     public class ApodDataProvider : IDataProvider<ApodRequestModel, IEnumerable<ApodResponseModel>>
     {
-        private const string BASE_URL = "https://api.nasa.gov/planetary/apod";
-
         private readonly HttpClient httpClient;
 
         public ApodDataProvider(HttpClient httpClient)
@@ -31,22 +29,25 @@
 
             foreach (var prop in properties)
             {
-                string name = prop.CustomAttributes.First().ConstructorArguments.First().Value.ToString();
-                string value = prop.GetValue(request)?.ToString();
-
-                if (!string.IsNullOrEmpty(value))
+                if (prop.CustomAttributes.Any())
                 {
-                    if (prop.PropertyType != typeof(int) ||
-                        (int.TryParse(value, out int result) &&
-                        result != 0))
+                    string name = prop.CustomAttributes.First().ConstructorArguments.First().Value?.ToString();
+                    string value = prop.GetValue(request)?.ToString();
+
+                    if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(value))
                     {
-                        queryString.Add(name, value);
+                        if (prop.PropertyType != typeof(int) ||
+                            (int.TryParse(value, out int result) &&
+                            result != 0))
+                        {
+                            queryString.Add(name, value);
+                        }
                     }
                 }
             }
 
-            string url = QueryHelpers.AddQueryString(BASE_URL, queryString);
 
+            string url = QueryHelpers.AddQueryString(request.Url, queryString);
             var response = await httpClient.GetAsync(url);
             var content = await response.Content.ReadAsStringAsync();
 

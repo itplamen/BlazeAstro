@@ -7,10 +7,8 @@
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.Astronauts;
 
-    public class AstronautsDataProvider : IDataProvider<AstronautsResponseModel>
+    public class AstronautsDataProvider : IDataProvider<AstronautsRequestModel, AstronautsResponseModel>
     {
-        private const string BASE_URL = "https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json";
-
         private readonly HttpClient httpClient;
 
         public AstronautsDataProvider(HttpClient httpClient)
@@ -18,11 +16,11 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<AstronautsResponseModel> GetData()
+        public async Task<AstronautsResponseModel> GetData(AstronautsRequestModel request)
         {
-            var response = await httpClient.GetFromJsonAsync<AstronautsResponseModel>(BASE_URL);
+            var response = await httpClient.GetFromJsonAsync<AstronautsResponseModel>(request.Url);
 
-            return response;
+            return response; ;
         }
     }
 }

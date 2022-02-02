@@ -13,8 +13,6 @@
 
     public class MarsPhotosDataProvider : IDataProvider<MarsPhotosRequestModel, MarsPhotosResponseModel>
     {
-        private const string BASE_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
-
         private readonly HttpClient httpClient;
 
         public MarsPhotosDataProvider(HttpClient httpClient)
@@ -35,7 +33,7 @@
                 queryString.Add(name, value);
             }
 
-            string url = QueryHelpers.AddQueryString($"{BASE_URL}/{request.RoverName}/photos", queryString);
+            string url = QueryHelpers.AddQueryString($"{request.Url}/{request.RoverName}/photos", queryString);
             var response = await httpClient.GetFromJsonAsync<MarsPhotosResponseModel>(url);
 
             return response;

@@ -2,16 +2,12 @@
 {
     using System.Threading.Tasks;
 
+    using BlazeAstro.Services.Models.Contracts;
+
     public interface IDataProvider<TRequest, TResponse>
-        where TRequest : class
+        where TRequest : IRequest
         where TResponse : class
     {
         Task<TResponse> GetData(TRequest request);
-    }
-
-    public interface IDataProvider<TResponse>
-        where TResponse : class
-    {
-        Task<TResponse> GetData();
     }
 }

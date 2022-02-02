@@ -8,8 +8,6 @@
 
     public class MarsPhotosRequestModel : IRequest
     {
-        public string Url { get; set; }
-
         [JsonProperty("api_key")]
         public string ApiKey { get; set; }
 
@@ -23,5 +21,10 @@
         public int Page { get; set; }
 
         public RoverName RoverName { get; set; }
+
+        public string Url { get; set; }
+
+        public string CacheKey => (15 * EarthDate.GetHashCode() ^ Sol.GetHashCode() ^ 
+            Page.GetHashCode() ^ RoverName.GetHashCode()).ToString();
     }
 }

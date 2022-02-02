@@ -6,8 +6,6 @@
 
     public class ApodRequestModel : IRequest
     {
-        public string Url { get; set; }
-
         [JsonProperty("api_key")]
         public string ApiKey { get; set; }
 
@@ -25,5 +23,11 @@
 
         [JsonProperty("count")]
         public int Count { get; set; }
+
+        public string Url { get; set; }
+
+        public string CacheKey => (ApiKey.GetHashCode() ^ Url.GetHashCode() ^ Date?.GetHashCode() ?? 0 ^
+            StartDate?.GetHashCode() ?? 0 ^ EndDate?.GetHashCode() ?? 0 ^
+            Thumbs.GetHashCode() ^ Count.GetHashCode() * 47).ToString();
     }
 }
