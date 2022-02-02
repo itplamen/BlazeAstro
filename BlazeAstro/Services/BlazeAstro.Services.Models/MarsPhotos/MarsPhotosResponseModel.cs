@@ -1,11 +1,12 @@
 ﻿namespace BlazeAstro.Services.Models.MarsPhotos
 {
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class MarsPhotosResponseModel
     {
-        [JsonPropertyName("photos")]
+        [JsonProperty("photos")]
         public IEnumerable<PhotoResponseModel> Photos { get; set; }
     }
 }

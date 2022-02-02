@@ -1,14 +1,15 @@
 ﻿namespace BlazeAstro.Services.Models.Astronauts
 {
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class AstronautsResponseModel
     {
-        [JsonPropertyName("people")]
+        [JsonProperty("people")]
         public IEnumerable<AstronautResponseModel> Astronauts { get; set; }
 
-        [JsonPropertyName("number")]
+        [JsonProperty("number")]
         public int Number { get; set; }
     }
 }

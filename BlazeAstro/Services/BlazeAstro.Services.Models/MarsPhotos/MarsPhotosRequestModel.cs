@@ -1,20 +1,25 @@
 ﻿namespace BlazeAstro.Services.Models.MarsPhotos
 {
     using System;
-    using System.Text.Json.Serialization;
 
-    public class MarsPhotosRequestModel
+    using Newtonsoft.Json;
+
+    using BlazeAstro.Services.Models.Contracts;
+
+    public class MarsPhotosRequestModel : IRequest
     {
-        [JsonPropertyName("api_key")]
+        public string Url { get; set; }
+
+        [JsonProperty("api_key")]
         public string ApiKey { get; set; }
 
-        [JsonPropertyName("earth_date")]
+        [JsonProperty("earth_date")]
         public DateTime EarthDate { get; set; }
 
-        [JsonPropertyName("sol")]
+        [JsonProperty("sol")]
         public int Sol { get; set; }
 
-        [JsonPropertyName("page")]
+        [JsonProperty("page")]
         public int Page { get; set; }
 
         public RoverName RoverName { get; set; }

@@ -1,25 +1,29 @@
 ﻿namespace BlazeAstro.Services.Models.Apod
 {
-    using System.Text.Json.Serialization;
+    using Newtonsoft.Json;
 
-    public class ApodRequestModel
+    using BlazeAstro.Services.Models.Contracts;
+
+    public class ApodRequestModel : IRequest
     {
-        [JsonPropertyName("api_key")]
+        public string Url { get; set; }
+
+        [JsonProperty("api_key")]
         public string ApiKey { get; set; }
 
-        [JsonPropertyName("date")]
+        [JsonProperty("date")]
         public string Date { get; set; }
 
-        [JsonPropertyName("start_date")]
+        [JsonProperty("start_date")]
         public string StartDate { get; set; }
 
-        [JsonPropertyName("end_date")]
+        [JsonProperty("end_date")]
         public string EndDate { get; set; }
 
-        [JsonPropertyName("thumbs")]
+        [JsonProperty("thumbs")]
         public bool Thumbs { get; set; }
 
-        [JsonPropertyName("count")]
+        [JsonProperty("count")]
         public int Count { get; set; }
     }
 }

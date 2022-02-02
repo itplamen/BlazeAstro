@@ -1,29 +1,30 @@
 ﻿namespace BlazeAstro.Services.Models.Apod
 {
     using System;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class ApodResponseModel
     {
-        [JsonPropertyName("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonPropertyName("explanation")]
+        [JsonProperty("explanation")]
         public string Explanation { get; set; }
 
-        [JsonPropertyName("url")]
+        [JsonProperty("url")]
         public string Url { get; set; }
 
-        [JsonPropertyName("thumbnail_url")]
+        [JsonProperty("thumbnail_url")]
         public string ThumbnailUrl { get; set; }
 
-        [JsonPropertyName("copyright")]
+        [JsonProperty("copyright")]
         public string Copyright { get; set; }
 
-        [JsonPropertyName("date")]
+        [JsonProperty("date")]
         public DateTime Date { get; set; }
 
-        [JsonPropertyName("media_type")]
+        [JsonProperty("media_type")]
         public MediaType MediaType { get; set; }
     }
 }

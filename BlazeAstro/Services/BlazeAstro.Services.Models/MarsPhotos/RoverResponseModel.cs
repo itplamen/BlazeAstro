@@ -1,20 +1,21 @@
 ﻿namespace BlazeAstro.Services.Models.MarsPhotos
 {
     using System;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class RoverResponseModel
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public RoverName Name { get; set; }
 
-        [JsonPropertyName("launch_date")]
+        [JsonProperty("launch_date")]
         public DateTime LaunchDate { get; set; }
 
-        [JsonPropertyName("landing_date")]
+        [JsonProperty("landing_date")]
         public DateTime LandingDate { get; set; }
     }
 }

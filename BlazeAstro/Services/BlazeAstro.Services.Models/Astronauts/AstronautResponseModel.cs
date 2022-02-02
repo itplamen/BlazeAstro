@@ -1,44 +1,45 @@
 ﻿namespace BlazeAstro.Services.Models.Astronauts
 {
     using System;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class AstronautResponseModel
     {
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("biophoto")]
+        [JsonProperty("biophoto")]
         public string ImgUrl { get; set; }
 
-        [JsonPropertyName("biophotowidth")]
+        [JsonProperty("biophotowidth")]
         public int ImgWidth { get; set; }
 
-        [JsonPropertyName("biophotoheight")]
+        [JsonProperty("biophotoheight")]
         public int ImgHeight { get; set; }
 
-        [JsonPropertyName("country")]
+        [JsonProperty("country")]
         public string Country { get; set; }
 
-        [JsonPropertyName("countryflag")]
+        [JsonProperty("countryflag")]
         public string CountryFlagUrl { get; set; }
 
-        [JsonPropertyName("launchdate")]
+        [JsonProperty("launchdate")]
         public DateTime LaunchDate { get; set; }
 
-        [JsonPropertyName("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [JsonPropertyName("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
 
-        [JsonPropertyName("bio")]
+        [JsonProperty("bio")]
         public string Biography { get; set; }
 
-        [JsonPropertyName("biolink")]
+        [JsonProperty("biolink")]
         public string Wikipedia { get; set; }
 
-        [JsonPropertyName("twitter")]
+        [JsonProperty("twitter")]
         public string Twitter { get; set; }
     }
 }

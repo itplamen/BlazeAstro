@@ -3,10 +3,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
-    using System.Net.Http.Json;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.WebUtilities;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.Apod;
@@ -44,9 +46,22 @@
             }
 
             string url = QueryHelpers.AddQueryString(BASE_URL, queryString);
-            var response = await httpClient.GetFromJsonAsync<IEnumerable<ApodResponseModel>>(url);
 
-            return response;
+            var response = await httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
+
+            var token = JToken.Parse(content);
+
+            if (token is JArray)
+            {
+                return JsonConvert.DeserializeObject<IEnumerable<ApodResponseModel>>(content);
+            }
+            else
+            {
+                var result = JsonConvert.DeserializeObject<ApodResponseModel>(content);
+
+                return new List<ApodResponseModel>() { result };
+            }
         }
     }
 }

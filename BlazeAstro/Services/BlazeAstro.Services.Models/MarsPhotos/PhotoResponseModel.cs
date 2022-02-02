@@ -1,20 +1,21 @@
 ﻿namespace BlazeAstro.Services.Models.MarsPhotos
 {
     using System;
-    using System.Text.Json.Serialization;
+
+    using Newtonsoft.Json;
 
     public class PhotoResponseModel
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("sol")]
+        [JsonProperty("sol")]
         public int Sol { get; set; }
 
-        [JsonPropertyName("img_src")]
+        [JsonProperty("img_src")]
         public string ImgUrl { get; set; }
 
-        [JsonPropertyName("earth_date")]
+        [JsonProperty("earth_date")]
         public DateTime EarthDate { get; set; }
     }
 }
