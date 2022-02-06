@@ -3,7 +3,7 @@
     using System;
 
     using BlazeAstro.Infrastructure.Mapping;
-    using BlazeAstro.Services.Models.Astronauts;
+    using BlazeAstro.Services.Models.AstronautsInSpace;
 
     public class AstronautOutputModel : IMapFrom<AstronautResponseModel>
     {

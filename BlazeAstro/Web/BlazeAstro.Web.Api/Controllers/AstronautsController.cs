@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using BlazeAstro.Services.DataProviders.Contracts;
-    using BlazeAstro.Services.Models.Astronauts;
+    using BlazeAstro.Services.Models.AstronautsInSpace;
     using BlazeAstro.Web.Shared.Models.Astronauts;
 
     [ApiController]

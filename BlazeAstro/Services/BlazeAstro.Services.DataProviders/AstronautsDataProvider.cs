@@ -6,7 +6,7 @@
     using Newtonsoft.Json;
 
     using BlazeAstro.Services.DataProviders.Contracts;
-    using BlazeAstro.Services.Models.Astronauts;
+    using BlazeAstro.Services.Models.AstronautsInSpace;
 
     public class AstronautsDataProvider : IDataProvider<AstronautsRequestModel, AstronautsResponseModel>
     {
