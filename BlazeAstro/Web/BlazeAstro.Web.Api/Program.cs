@@ -1,5 +1,7 @@
 using System.Reflection;
 
+using AngleSharp.Html.Parser;
+
 using Microsoft.Extensions.Caching.Distributed;
 
 using BlazeAstro.Infrastructure.Mapping;
@@ -26,6 +28,7 @@ builder.Services.AddScoped<IApodRequestValidation, ApodDateRangesRequestValidati
 builder.Services.AddScoped<IApodRequestValidation, ApodCountRequestValidation>();
 
 builder.Services.AddSingleton(new HttpClient());
+builder.Services.AddSingleton<IHtmlParser, HtmlParser>();
 
 builder.Services.AddTransient<ApodDataProvider>();
 builder.Services.AddTransient<AstronautsDataProvider>();
