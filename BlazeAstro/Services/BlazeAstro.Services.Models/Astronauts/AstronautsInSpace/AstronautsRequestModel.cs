@@ -1,4 +1,4 @@
-﻿namespace BlazeAstro.Services.Models.AstronautsInSpace
+﻿namespace BlazeAstro.Services.Models.Astronauts.AstronautsInSpace
 {
     using BlazeAstro.Services.Models.Contracts;
 

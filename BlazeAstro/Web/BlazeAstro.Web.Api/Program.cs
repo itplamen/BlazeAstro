@@ -8,10 +8,10 @@ using BlazeAstro.Infrastructure.Mapping;
 using BlazeAstro.Services.DataProviders;
 using BlazeAstro.Services.DataProviders.Contracts;
 using BlazeAstro.Services.Models.Apod;
+using BlazeAstro.Services.Models.Astronauts.AstronautInfo;
+using BlazeAstro.Services.Models.Astronauts.AstronautsInSpace;
 using BlazeAstro.Web.Shared.Models.Apod;
 using BlazeAstro.Web.Shared.Validations.Apod;
-using BlazeAstro.Services.Models.AstronautsInSpace;
-using BlazeAstro.Services.Models.Astronauts.AstronautInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
