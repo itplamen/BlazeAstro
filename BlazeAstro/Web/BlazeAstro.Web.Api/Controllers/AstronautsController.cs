@@ -9,7 +9,6 @@
     using BlazeAstro.Services.Models.Astronauts.AstronautsInSpace;
     using BlazeAstro.Web.Shared.Models.Astronauts;
 
-
     [ApiController]
     [Route("api/[controller]")]
     public class AstronautsController : ControllerBase
