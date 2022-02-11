@@ -34,9 +34,9 @@
     </div>
 </div>
 <div class="row">
-    @if (outputModel != null)
+    @if (images != null)
     {
-        foreach (var apod in outputModel)
+        foreach (var apod in images)
         {
             <div class="col-2">
                 <div class="card apod">
@@ -45,7 +45,14 @@
                         <h5 class="card-title">@apod.Title</h5>
                         <p class="card-text"><small class="fst-normal">@apod.Date</small></p>
                         <p class="card-text explanation"><small class="fst-italic">@apod.Explanation</small></p>
-                        <a href="/apod/@apod.Date" class="btn btn-light">More Info</a>
+                        <button 
+                            type="button" 
+                            class="btn btn-light" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#ApodModal" 
+                            @onclick="() => OnShowMoreInfo(apod.Date)">
+                            More Info
+                        </button>
                     </div>
                 </div>
             </div>
@@ -53,16 +60,48 @@
     }
 </div>
 
+<div class="modal fade" id="ApodModal" tabindex="-1" role="dialog" aria-labelledby="ApodModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ApodModalLabel">@image?.Title</h5>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img src="@image?.Url" class="card-img-top" alt="Apod Img">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <span class="oi oi-calendar"></span>
+                                @image?.Date
+                            </small>
+                            <small class="text-muted">
+                                <span class="oi oi-person"></span>
+                                @(image?.Copyright ?? "NASA")
+                            </small>
+                        </p>
+                        <p class="card-text">@image?.Explanation</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @code {
     string selected;
-    IEnumerable<ApodOutputModel> outputModel;
-    DateTimeOffset? startDate { get; set; } = DateTime.Today.AddDays(-5);
-    DateTimeOffset? endDate { get; set; } = DateTime.Today;
+    ApodOutputModel image;
+    IEnumerable<ApodOutputModel> images;
+    DateTimeOffset? startDate { get; set; } = DateTime.Today.AddDays(-6);
+    DateTimeOffset? endDate { get; set; } = DateTime.Today.AddDays(-1);
     IEnumerable<string> randomNumbers = new List<string>() { "None", "10", "25", "50", "100" };
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
+        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
             $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
     }
 
@@ -70,7 +109,7 @@
     {
         selected = randomNumbers.First();
 
-        outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
+        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
             $"api/apod?startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}");
     }
 
@@ -79,7 +118,12 @@
         if (e.Value.ToString() != randomNumbers.First())
         {
             selected = e.Value.ToString();
-            outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");   
+            images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");   
         }
+    }
+
+    private void OnShowMoreInfo(string date)
+    {
+        image = images.FirstOrDefault(x => x.Date == date);
     }
 }

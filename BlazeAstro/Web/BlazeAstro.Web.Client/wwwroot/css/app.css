@@ -125,3 +125,7 @@ a, .btn-link {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+#ApodModal small{
+    margin-right: 10px;
+}
