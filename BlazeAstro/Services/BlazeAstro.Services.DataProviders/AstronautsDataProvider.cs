@@ -30,6 +30,11 @@
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<AstronautsResponseModel>(content);
 
+            foreach (var astronaut in result.Astronauts)
+            {
+                astronaut.Name = astronaut.Name.Replace(" ", "-");
+            }
+
             return result;
         }
 

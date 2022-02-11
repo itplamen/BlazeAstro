@@ -67,19 +67,38 @@ a, .btn-link {
     display: inline;
 }
 
-.card-body .profile-img, .card-body .profile-img img {
+.astronauts {
+    width: 350px;
+    height: 235px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000000;
+}
+
+.astronauts .card-body .profile-img, .card-body .profile-img img {
     width: 200px;
     height: 200px;
 }
 
-.card-body .title {
+.astronauts .card-body .title {
     display: inline-block;
 }
 
-.card-body .biography {
-    height: 50px; 
+.astronauts .card-body .location {
+    font-size: smaller;
 }
 
-.card-body .biolink {
+.astronauts .card-body .biography {
+    height: 60px;
+    font-size: smaller;
+}
+
+.astronauts .card-body .biolink {
     margin-right: 5px;
+    font-size: 12px;
+}
+
+.biolink-logo {
+    width: 20px;
+    height: 20px;
 }
