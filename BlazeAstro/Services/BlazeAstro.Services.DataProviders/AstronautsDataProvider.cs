@@ -46,6 +46,7 @@
 
             var result = new AstronautInfoResponseModel();
             result.DateOfBirth = GetDateOfBirth(document);
+            result.ImgUrl = document.QuerySelectorAll("article .img-fluid").Last().Attributes["src"].Value;
             result.AstronautInfo = document.QuerySelector("article div.entry-content p.astronaut-description").TextContent;
             result.SpaceAgencyName = document.QuerySelectorAll("article div.entry-content h2.h5").Last().InnerHtml;
             result.SpaceAgencyInfo = document.QuerySelectorAll("article div.entry-content p").Last().PreviousSibling.TextContent;

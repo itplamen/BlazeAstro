@@ -1,0 +1,35 @@
+﻿@page "/astronauts/{name}"
+
+@inject HttpClient HttpClient 
+
+@if(outputModel != null)
+{
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@outputModel.ImgUrl" class="img-fluid rounded-start" alt="@Name">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">@Name.Replace("-", " ")</h2>
+                    <p class="card-text"><small>Date of birth: @outputModel.DateOfBirth</small></p>
+                    <p class="card-text">@outputModel.AstronautInfo</p>
+                    <h5>@outputModel.SpaceAgencyName</h5>
+                    <p class="card-text">@outputModel.SpaceAgencyInfo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    AstronautInfoOutputModel outputModel;
+
+    protected override async Task OnInitializedAsync()
+    {
+        outputModel = await HttpClient.GetFromJsonAsync<AstronautInfoOutputModel>($"api/astronauts/{Name}");
+    }
+}
