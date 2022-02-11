@@ -101,3 +101,27 @@ a, .btn-link {
     width: 20px;
     height: 20px;
 }
+
+.apod.card {
+    margin-top: 20px;
+}
+
+.apod.card img {
+    height: 150px;
+}
+
+.apod.card .card-title {
+    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.apod.card .explanation {
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

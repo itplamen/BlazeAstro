@@ -1,7 +1,85 @@
 ﻿@page "/apod"
 
-<h3>Apod</h3>
+@inject HttpClient HttpClient 
+
+<h3>NASA Astronomy Picture of the Day (APOD)</h3>
+<p>Each day a different image or photograph of our universe is featured, along with a brief explanation written by a professional astronomer</p>
+
+ <div class="row">
+     <div class="col">
+         <div class="form-floating">
+             <DateRangePicker class="form-control" id="DateRange"
+                MinDate="@DateTimeOffset.ParseExact(ApodConstants.MinRange, ApodConstants.DateFormat, null)"
+                MaxDate="DateTimeOffset.Now"
+                @bind-StartDate="startDate"
+                @bind-EndDate="endDate"
+                OnRangeSelect="OnRangeSelect" />    
+            <label for="DateRange">Select date range ...</label>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-floating">
+            <select @onchange="OnRandomImageSelect"
+                class="form-select"
+                id="RandomImages"
+                aria-label="Random images">
+
+                @foreach (var number in randomNumbers)
+                {
+                    <option selected="@(number == selected)" value=@number>@number</option>
+                }
+            </select>
+            <label for="RandomImages">Select random images ...</label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @if (outputModel != null)
+    {
+        foreach (var apod in outputModel)
+        {
+            <div class="col-2">
+                <div class="card apod">
+                    <img src="@apod.Url" class="card-img-top" alt="Apod Img">
+                    <div class="card-body">
+                        <h5 class="card-title">@apod.Title</h5>
+                        <p class="card-text"><small class="fst-normal">@apod.Date</small></p>
+                        <p class="card-text explanation"><small class="fst-italic">@apod.Explanation</small></p>
+                        <a href="/apod/@apod.Date" class="btn btn-light">More Info</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
 
 @code {
+    string selected;
+    IEnumerable<ApodOutputModel> outputModel;
+    DateTimeOffset? startDate { get; set; } = DateTime.Today.AddDays(-5);
+    DateTimeOffset? endDate { get; set; } = DateTime.Today;
+    IEnumerable<string> randomNumbers = new List<string>() { "None", "10", "25", "50", "100" };
 
+    protected override async Task OnInitializedAsync()
+    {
+        outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
+            $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
+    }
+
+    private async Task OnRangeSelect(DateRange range)
+    {
+        selected = randomNumbers.First();
+
+        outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
+            $"api/apod?startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}");
+    }
+
+    private async Task OnRandomImageSelect(ChangeEventArgs e)
+    {
+        if (e.Value.ToString() != randomNumbers.First())
+        {
+            selected = e.Value.ToString();
+            outputModel = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");   
+        }
+    }
 }
