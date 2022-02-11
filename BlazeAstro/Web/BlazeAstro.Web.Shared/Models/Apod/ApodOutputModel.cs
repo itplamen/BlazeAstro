@@ -1,11 +1,12 @@
 ﻿namespace BlazeAstro.Web.Shared.Models.Apod
 {
-    using System;
+    using AutoMapper;
 
     using BlazeAstro.Infrastructure.Mapping;
     using BlazeAstro.Services.Models.Apod;
-    
-    public class ApodOutputModel : IMapFrom<ApodResponseModel>
+    using BlazeAstro.Web.Shared.Constants;
+
+    public class ApodOutputModel : IMapFrom<ApodResponseModel>, ICustomMapping
     {
         public string Title { get; set; }
 
@@ -17,8 +18,14 @@
 
         public string Copyright { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public string MediaType { get; set; }
+
+        public void CreateMappings(Profile mapper)
+        {
+            mapper.CreateMap<ApodResponseModel, ApodOutputModel>()
+                .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date.ToString(ApodConstants.DateFormat)));
+        }
     }
 }

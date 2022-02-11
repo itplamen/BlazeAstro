@@ -1,5 +1,7 @@
 ﻿namespace BlazeAstro.Services.DataProviders
 {
+    using System;
+    using System.Globalization;
     using System.Linq;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -65,7 +67,9 @@
                 .Replace("–", string.Empty)
                 .Trim();
 
-            return dateOfBirth;
+            var dateTime = DateTime.ParseExact(dateOfBirth, "M/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+            
+            return dateTime.ToString("yyyy-MM-dd");
         }
     }
 }
