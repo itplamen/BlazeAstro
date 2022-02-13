@@ -17,5 +17,11 @@
 
         [JsonProperty("earth_date")]
         public DateTime EarthDate { get; set; }
+
+        [JsonProperty("camera")]
+        public CameraResponseModel Camera { get; set; }
+
+        [JsonProperty("rover")]
+        public RoverResponseModel Rover { get; set; }
     }
 }

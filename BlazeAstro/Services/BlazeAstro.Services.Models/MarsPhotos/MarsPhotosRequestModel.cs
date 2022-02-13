@@ -1,7 +1,5 @@
 ﻿namespace BlazeAstro.Services.Models.MarsPhotos
 {
-    using System;
-
     using Newtonsoft.Json;
 
     using BlazeAstro.Services.Models.Contracts;
@@ -12,7 +10,7 @@
         public string ApiKey { get; set; }
 
         [JsonProperty("earth_date")]
-        public DateTime EarthDate { get; set; }
+        public string EarthDate { get; set; }
 
         [JsonProperty("sol")]
         public int Sol { get; set; }

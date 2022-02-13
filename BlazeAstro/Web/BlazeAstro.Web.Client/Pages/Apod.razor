@@ -95,8 +95,8 @@
     string selected;
     ApodOutputModel image;
     IEnumerable<ApodOutputModel> images;
-    DateTimeOffset? startDate { get; set; } = DateTime.Today.AddDays(-6);
-    DateTimeOffset? endDate { get; set; } = DateTime.Today.AddDays(-1);
+    DateTimeOffset? startDate = DateTime.Today.AddDays(-6);
+    DateTimeOffset? endDate = DateTime.Today.AddDays(-1);
     IEnumerable<string> randomNumbers = new List<string>() { "None", "10", "25", "50", "100" };
 
     protected override async Task OnInitializedAsync()
@@ -105,7 +105,7 @@
             $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
     }
 
-    private async Task OnRangeSelect(DateRange range)
+    private async void OnRangeSelect(DateRange range)
     {
         selected = randomNumbers.First();
 
@@ -113,7 +113,7 @@
             $"api/apod?startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}");
     }
 
-    private async Task OnRandomImageSelect(ChangeEventArgs e)
+    private async void OnRandomImageSelect(ChangeEventArgs e)
     {
         if (e.Value.ToString() != randomNumbers.First())
         {
