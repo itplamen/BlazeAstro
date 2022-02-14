@@ -109,8 +109,16 @@
     {
         selected = randomNumbers.First();
 
-        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
-            $"api/apod?startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}");
+        string urlParam = $"date={range.Start.Date.ToShortDateString()}";
+
+        if (range.Start.Date != range.End.Date)
+        {
+            urlParam = $"startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}";
+        }
+
+        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?{urlParam}");
+
+        StateHasChanged();
     }
 
     private async void OnRandomImageSelect(ChangeEventArgs e)
@@ -118,7 +126,9 @@
         if (e.Value.ToString() != randomNumbers.First())
         {
             selected = e.Value.ToString();
-            images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");   
+            images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");
+            
+            StateHasChanged();
         }
     }
 
