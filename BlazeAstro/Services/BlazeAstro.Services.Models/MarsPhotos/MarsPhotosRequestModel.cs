@@ -22,7 +22,7 @@
 
         public string Url { get; set; }
 
-        public string CacheKey => (15 * EarthDate.GetHashCode() ^ Sol.GetHashCode() ^ 
-            Page.GetHashCode() ^ RoverName.GetHashCode()).ToString();
+        public string CacheKey => (15 * ApiKey.GetHashCode() ^ Url.GetHashCode() ^ EarthDate?.GetHashCode() ?? 0 ^ Sol.GetHashCode() ^ 
+            Page.GetHashCode() ^ RoverName.ToString().GetHashCode()).ToString();
     }
 }

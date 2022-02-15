@@ -28,10 +28,21 @@
 
             foreach (var prop in properties)
             {
-                string name = prop.CustomAttributes.First().ConstructorArguments.First().Value.ToString();
-                string value = prop.GetValue(request).ToString();
+                if (prop.CustomAttributes.Any())
+                {
+                    string name = prop.CustomAttributes.First().ConstructorArguments.First().Value?.ToString();
+                    string value = prop.GetValue(request)?.ToString();
 
-                queryString.Add(name, value);
+                    if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(value))
+                    {
+                        if (prop.PropertyType != typeof(int) ||
+                            (int.TryParse(value, out int parsed) &&
+                            parsed != 0))
+                        {
+                            queryString.Add(name, value);
+                        }
+                    }
+                }
             }
 
             string url = QueryHelpers.AddQueryString($"{request.Url}/{request.RoverName}/photos", queryString);

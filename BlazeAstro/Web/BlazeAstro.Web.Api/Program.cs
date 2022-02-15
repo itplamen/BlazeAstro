@@ -58,6 +58,12 @@ builder.Services.AddTransient<IDataProvider<AstronautInfoRequestModel, Astronaut
         x.GetRequiredService<IDistributedCache>(),
         x.GetRequiredService<AstronautsDataProvider>()));
 
+builder.Services.AddTransient<IDataProvider<MarsPhotosRequestModel, MarsPhotosResponseModel>,
+    CacheDataProvider<MarsPhotosRequestModel, MarsPhotosResponseModel>>(x =>
+    new CacheDataProvider<MarsPhotosRequestModel, MarsPhotosResponseModel>(
+        x.GetRequiredService<IDistributedCache>(),
+        x.GetRequiredService<MarsPhotosDataProvider>()));
+
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.InstanceName = "BlazeAstro";
