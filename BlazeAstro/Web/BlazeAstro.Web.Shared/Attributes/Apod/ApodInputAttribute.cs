@@ -5,8 +5,8 @@
     using System.ComponentModel.DataAnnotations;
 
     using BlazeAstro.Web.Shared.Models.Apod;
-    using BlazeAstro.Web.Shared.Validations.Apod;
-    
+    using BlazeAstro.Web.Shared.Validations.Contracts;
+
     [AttributeUsage(AttributeTargets.Class)]
     public class ApodInputAttribute : ValidationAttribute
     {
@@ -16,7 +16,9 @@
 
             if (inputModel != null)
             {
-                var requestValidations = validationContext.GetService(typeof(IEnumerable<IApodRequestValidation>)) as IEnumerable<IApodRequestValidation>;
+                var requestValidations = validationContext
+                    .GetService(typeof(IEnumerable<IRequestValidation<ApodInputModel>>)) as IEnumerable<IRequestValidation<ApodInputModel>>;
+
                 foreach (var validation in requestValidations)
                 {
                     var result = validation.Validate(inputModel);

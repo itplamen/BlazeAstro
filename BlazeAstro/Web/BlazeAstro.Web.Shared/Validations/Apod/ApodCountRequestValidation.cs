@@ -3,8 +3,9 @@
     using System;
 
     using BlazeAstro.Web.Shared.Models.Apod;
+    using BlazeAstro.Web.Shared.Validations.Contracts;
 
-    public class ApodCountRequestValidation : IApodRequestValidation
+    public class ApodCountRequestValidation : IRequestValidation<ApodInputModel>
     {
         public (bool IsSuccess, string ErrorMessage) Validate(ApodInputModel inputModel)
         {
