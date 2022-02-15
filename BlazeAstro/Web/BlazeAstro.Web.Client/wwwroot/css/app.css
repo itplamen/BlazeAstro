@@ -102,15 +102,15 @@ a, .btn-link {
     height: 20px;
 }
 
-.apod.card {
+.card-astro-img {
     margin-top: 20px;
 }
 
-.apod.card img {
+.card-astro-img img {
     height: 150px;
 }
 
-.apod.card .card-title {
+.card-astro-img .card-title {
     height: 50px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -118,7 +118,7 @@ a, .btn-link {
     overflow: hidden;
 }
 
-.apod.card .explanation {
+.card-astro-img .explanation {
     display: -webkit-box;
     max-width: 200px;
     -webkit-line-clamp: 2;

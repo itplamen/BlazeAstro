@@ -1,7 +1,139 @@
 ﻿@page "/mars"
 
-<h3>Mars</h3>
+@inject HttpClient HttpClient
+
+ <div class="row">
+     <div class="col">
+        <div class="form-floating">
+            <select @onchange="OnRoverSelect"
+                class="form-select"
+                id="Rovers"
+                aria-label="Rovers">
+
+                @foreach (var rover in MarsConstants.Rovers.Keys)
+                {
+                    <option selected="@(rover == selected)" value=@rover.ToString()>@rover</option>
+                }
+            </select>
+            <label for="Rovers">Select rover ...</label>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-floating">
+            <input class="form-control form-control" type="number" min="0" @bind="@sol" id="Sol" @oninput="OnSolInput" />
+            <label for="Sol">Enter sol ...</label>
+        </div>
+    </div>
+    <div class="col">
+        <div class="form-floating">
+            <DateRangePicker class="form-control" id="EarthDate"
+                SingleDatePicker="true"
+                MinDate="DateTimeOffset.ParseExact(MarsConstants.Rovers[selected].LandingDate.ToString(MarsConstants.DateFormat), MarsConstants.DateFormat, null)"
+                MaxDate="DateTimeOffset.ParseExact(MarsConstants.Rovers[selected].LastDate.ToString(MarsConstants.DateFormat), MarsConstants.DateFormat, null)"
+                OnRangeSelect="OnEarthDateSelect" 
+                @bind-StartDate="earthDate" />    
+            <label for="EarthDate">Select earth date ...</label>
+        </div>
+    </div>
+    <div class="col">
+         <div class="form-floating">
+             <button type="button" class="btn btn-success" @onclick="OnShowImages">Show Images</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @if (outputModel != null)
+    {
+        foreach (var img in outputModel.Photos)
+        {
+            <div class="col-2">
+                <div class="card card-astro-img">
+                    <img src="@img.ImgUrl" class="card-img-top" alt="@(img.Rover.Name + " Img")">
+                    <div class="card-body">
+                        <h5 class="card-title">@img.Rover.Name - @img.Id</h5>
+                        <p class="card-text"><small class="fst-normal">@img.EarthDate (Sol: @img.Sol)</small></p>
+                        <p class="card-text explanation"><small class="fst-italic">@img.Camera.FullName (@img.Camera.Id - @img.Camera.Name)</small></p>
+                        <button 
+                            type="button" 
+                            class="btn btn-light" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#MarsModal" 
+                            @onclick="() => OnShowMoreInfo(img.Id)">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div class="modal fade" id="MarsModal" tabindex="-1" role="dialog" aria-labelledby="MarsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+    int sol;
+    PhotoOutputModel photo;
+    MarsOutputModel outputModel;
+    DateTimeOffset? earthDate = MarsConstants.Rovers.First().Value.LandingDate;
+    RoverName selected = MarsConstants.Rovers.Keys.First();
+    string minDateRange = MarsConstants.Rovers.First().Value.LandingDate.ToString(MarsConstants.DateFormat);
 
+    protected override async Task OnInitializedAsync()
+    {
+        outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>
+            ($"api/mars?RoverName={RoverName.Curiosity.ToString()}&EarthDate={DateTime.Now.AddDays(-2).ToString(MarsConstants.DateFormat)}");
+    }
+
+    private void OnSolInput(ChangeEventArgs e)
+    {
+        earthDate = MarsConstants.Rovers[selected].LandingDate;
+    }
+
+    private void OnRoverSelect(ChangeEventArgs e)
+    {
+        selected = (RoverName)Enum.Parse(typeof(RoverName), e.Value.ToString());
+        earthDate = MarsConstants.Rovers[selected].LandingDate;
+        sol = 0;
+    }
+
+    private void OnEarthDateSelect()
+    {
+        sol = 0;
+    }
+
+    private async void OnShowImages(MouseEventArgs e)
+    {
+        string urlParam = $"RoverName={selected.ToString()}&"; 
+
+        if (sol > 0)
+        {
+            urlParam += $"Sol={sol}";
+        }
+        else
+        {
+            urlParam += $"EarthDate={earthDate.Value.ToString(MarsConstants.DateFormat)}";
+        }
+
+        outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>($"api/mars?{urlParam}");
+
+        StateHasChanged();
+    }
+
+    private void OnShowMoreInfo(int photoId)
+    {
+        photo = outputModel.Photos.FirstOrDefault(x => x.Id == photoId);
+    }
 }
