@@ -11,9 +11,11 @@ using BlazeAstro.Services.Models.Apod;
 using BlazeAstro.Services.Models.Astronauts.AstronautInfo;
 using BlazeAstro.Services.Models.Astronauts.AstronautsInSpace;
 using BlazeAstro.Services.Models.MarsPhotos;
+using BlazeAstro.Web.Shared.Models.Mars;
 using BlazeAstro.Web.Shared.Models.Apod;
 using BlazeAstro.Web.Shared.Validations.Apod;
 using BlazeAstro.Web.Shared.Validations.Contracts;
+using BlazeAstro.Web.Shared.Validations.Mars;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,7 @@ builder.Services.AddAutoMapper((_, config) =>
 builder.Services.AddScoped<IRequestValidation<ApodInputModel>, ApodDateRequestValidation>();
 builder.Services.AddScoped<IRequestValidation<ApodInputModel>, ApodDateRangesRequestValidation>();
 builder.Services.AddScoped<IRequestValidation<ApodInputModel>, ApodCountRequestValidation>();
+builder.Services.AddScoped<IRequestValidation<MarsInputModel>, MarsRequestValidation>();
 
 builder.Services.AddSingleton(new HttpClient());
 builder.Services.AddSingleton<IHtmlParser, HtmlParser>();
