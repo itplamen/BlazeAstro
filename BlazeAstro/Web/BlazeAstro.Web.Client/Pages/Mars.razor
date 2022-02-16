@@ -76,7 +76,7 @@
     protected override async Task OnInitializedAsync()
     {
         outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>
-            ($"api/mars?RoverName={RoverName.Curiosity.ToString()}&EarthDate={DateTime.Now.AddDays(-2).ToString(MarsConstants.DateFormat)}");
+            ($"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-2).ToString(MarsConstants.DateFormat)}");
     }
 
     private void OnSolInput(ChangeEventArgs e)

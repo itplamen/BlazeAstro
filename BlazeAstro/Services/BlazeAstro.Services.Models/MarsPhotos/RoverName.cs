@@ -11,6 +11,9 @@
         Curiosity,
 
         [EnumMember(Value = "Opportunity")]
-        Opportunity
+        Opportunity,
+
+        [EnumMember(Value = "Perseverance")]
+        Perseverance
     }
 }

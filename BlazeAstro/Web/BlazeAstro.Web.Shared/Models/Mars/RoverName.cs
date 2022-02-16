@@ -4,6 +4,7 @@
     {
         Spirit,
         Curiosity,
-        Opportunity
+        Opportunity,
+        Perseverance
     }
 }
