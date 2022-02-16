@@ -33,10 +33,11 @@
         </div>
     </div>
 </div>
-<div class="row">
-    @if (images != null)
-    {
-        foreach (var apod in images)
+
+@if (images != null)
+{
+    <div class="row">
+        @foreach (var apod in images)
         {
             <ImageComponent Url="@apod.Url" Title="@apod.Title" Text="@apod.Date" Explanation="@apod.Explanation" OnClick="() => OnShowMoreInfo(apod.Date)">
                 <div class="modal-header">
@@ -62,8 +63,8 @@
                 </div>
             </ImageComponent>
         }
-    }
-</div>
+    </div>
+}
 
 @code {
     string selected;

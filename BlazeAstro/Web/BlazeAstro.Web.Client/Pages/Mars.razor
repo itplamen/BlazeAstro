@@ -41,10 +41,11 @@
         </div>
     </div>
 </div>
-<div class="row">
-    @if (outputModel != null)
-    {
-        foreach (var img in outputModel.Photos)
+
+@if (outputModel != null)
+{
+    <div class="row">
+        @foreach (var img in outputModel.Photos)
         {
             <ImageComponent 
                 Url="@img.ImgUrl" 
@@ -60,10 +61,10 @@
                         <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
                     </div>
                 </div>
-            </ImageComponent>    
+            </ImageComponent>
         }
-    }
-</div>
+    </div>
+}
 
 @code {
     int sol;
