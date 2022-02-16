@@ -7,6 +7,8 @@
 
     public static class MarsConstants
     {
+        public const int ItemsPerPage = 24;
+
         public const string DateFormat = "yyyy-MM-dd";
 
         public static IDictionary<RoverName, (DateTime LandingDate, DateTime LastDate)> Rovers = 

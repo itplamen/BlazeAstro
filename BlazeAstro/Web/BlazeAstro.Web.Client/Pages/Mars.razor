@@ -45,29 +45,46 @@
 @if (outputModel != null)
 {
     <div class="row">
-        @foreach (var img in outputModel.Photos)
+        @for (int i = 0; i < outputModel.Photos.Length; i++)
         {
+            if (i > lastImgIndex)
+            {
+                break;
+            }
+
+            var img = @outputModel.Photos[i];
+            
             <ImageComponent 
                 Url="@img.ImgUrl" 
                 Title="@($"{img.Rover.Name} - {img.Id}")" 
                 Text="@($"{img.EarthDate} (Sol: {img.Sol}")" 
                 Explanation="@($"{img.Camera.FullName} ({img.Camera.Id} - {img.Camera.Name})")" 
                 OnClick="() => OnShowMoreInfo(img.Id)">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
+                        </div>
+                    </div>
             </ImageComponent>
         }
     </div>
+
+    if (outputModel.Photos.Length > MarsConstants.ItemsPerPage && outputModel.Photos.Length - 1 > lastImgIndex)
+    {
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" class="btn btn-success" id="ShowMoreBtn" @onclick="@OnShowMoreImages">Show More</button>
+            </div>
+        </div>
+    }
 }
 
 @code {
     int sol;
+    int lastImgIndex;
     PhotoOutputModel photo;
     MarsOutputModel outputModel;
     DateTimeOffset? earthDate = MarsConstants.Rovers.First().Value.LandingDate;
@@ -77,7 +94,12 @@
     protected override async Task OnInitializedAsync()
     {
         outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>
-            ($"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-2).ToString(MarsConstants.DateFormat)}");
+            ($"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-3).ToString(MarsConstants.DateFormat)}");
+
+        if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
+        {
+            lastImgIndex = MarsConstants.ItemsPerPage - 1;
+        }
     }
 
     private void OnSolInput(ChangeEventArgs e)
@@ -112,11 +134,23 @@
 
         outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>($"api/mars?{urlParam}");
 
+        if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
+        {
+            lastImgIndex = MarsConstants.ItemsPerPage - 1;
+        }
+
         StateHasChanged();
     }
 
     private void OnShowMoreInfo(int photoId)
     {
         photo = outputModel.Photos.FirstOrDefault(x => x.Id == photoId);
+    }
+
+    private void OnShowMoreImages()
+    {
+        lastImgIndex += MarsConstants.ItemsPerPage;
+
+        StateHasChanged();
     }
 }
