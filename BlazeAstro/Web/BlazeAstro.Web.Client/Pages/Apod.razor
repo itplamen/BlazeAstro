@@ -38,57 +38,31 @@
     {
         foreach (var apod in images)
         {
-            <div class="col-2">
-                <div class="card card-astro-img">
-                    <img src="@apod.Url" class="card-img-top" alt="Apod Img">
-                    <div class="card-body">
-                        <h5 class="card-title">@apod.Title</h5>
-                        <p class="card-text"><small class="fst-normal">@apod.Date</small></p>
-                        <p class="card-text explanation"><small class="fst-italic">@apod.Explanation</small></p>
-                        <button 
-                            type="button" 
-                            class="btn btn-light" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#ApodModal" 
-                            @onclick="() => OnShowMoreInfo(apod.Date)">
-                            More Info
-                        </button>
+            <ImageComponent Url="@apod.Url" Title="@apod.Title" Text="@apod.Date" Explanation="@apod.Explanation" OnClick="() => OnShowMoreInfo(apod.Date)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <img src="@image?.Url" class="card-img-top" alt="Apod Img">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <span class="oi oi-calendar"></span>
+                                    @image?.Date
+                                </small>
+                                <small class="text-muted">
+                                    <span class="oi oi-person"></span>
+                                    @(image?.Copyright ?? "NASA")
+                                </small>
+                            </p>
+                            <p class="card-text">@image?.Explanation</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ImageComponent>
         }
     }
-</div>
-
-<div class="modal fade" id="ApodModal" tabindex="-1" role="dialog" aria-labelledby="ApodModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ApodModalLabel">@image?.Title</h5>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <img src="@image?.Url" class="card-img-top" alt="Apod Img">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <small class="text-muted">
-                                <span class="oi oi-calendar"></span>
-                                @image?.Date
-                            </small>
-                            <small class="text-muted">
-                                <span class="oi oi-person"></span>
-                                @(image?.Copyright ?? "NASA")
-                            </small>
-                        </p>
-                        <p class="card-text">@image?.Explanation</p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 @code {
@@ -127,7 +101,7 @@
         {
             selected = e.Value.ToString();
             images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");
-            
+
             StateHasChanged();
         }
     }

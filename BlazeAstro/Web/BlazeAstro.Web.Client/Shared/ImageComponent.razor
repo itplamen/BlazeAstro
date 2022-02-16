@@ -1,0 +1,49 @@
+﻿<div class="col-2">
+    <div class="card card-astro-img">
+        <img src="@Url" class="card-img-top" alt="Img">
+        <div class="card-body">
+            <h5 class="card-title">@Title</h5>
+            <p class="card-text"><small class="fst-normal">@Text</small></p>
+            <p class="card-text explanation"><small class="fst-italic">@Explanation</small></p>
+            <button 
+                type="button" 
+                class="btn btn-light" 
+                data-bs-toggle="modal" 
+                data-bs-target="#Modal" 
+                @onclick="@OnClick">
+                More Info
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            @ChildContent
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Url { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public string Explanation { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

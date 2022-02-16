@@ -46,41 +46,23 @@
     {
         foreach (var img in outputModel.Photos)
         {
-            <div class="col-2">
-                <div class="card card-astro-img">
-                    <img src="@img.ImgUrl" class="card-img-top" alt="@(img.Rover.Name + " Img")">
-                    <div class="card-body">
-                        <h5 class="card-title">@img.Rover.Name - @img.Id</h5>
-                        <p class="card-text"><small class="fst-normal">@img.EarthDate (Sol: @img.Sol)</small></p>
-                        <p class="card-text explanation"><small class="fst-italic">@img.Camera.FullName (@img.Camera.Id - @img.Camera.Name)</small></p>
-                        <button 
-                            type="button" 
-                            class="btn btn-light" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#MarsModal" 
-                            @onclick="() => OnShowMoreInfo(img.Id)">
-                            More Info
-                        </button>
+            <ImageComponent 
+                Url="@img.ImgUrl" 
+                Title="@($"{img.Rover.Name} - {img.Id}")" 
+                Text="@($"{img.EarthDate} (Sol: {img.Sol}")" 
+                Explanation="@($"{img.Camera.FullName} ({img.Camera.Id} - {img.Camera.Name})")" 
+                OnClick="() => OnShowMoreInfo(img.Id)">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
                     </div>
                 </div>
-            </div>
+            </ImageComponent>    
         }
     }
-</div>
-
-<div class="modal fade" id="MarsModal" tabindex="-1" role="dialog" aria-labelledby="MarsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 @code {
