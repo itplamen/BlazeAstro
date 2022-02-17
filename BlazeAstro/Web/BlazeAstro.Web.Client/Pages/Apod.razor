@@ -9,6 +9,7 @@
      <div class="col">
          <div class="form-floating">
              <DateRangePicker class="form-control" id="DateRange"
+                DateFormat="@ApodConstants.DateFormat"
                 MinDate="@DateTimeOffset.ParseExact(ApodConstants.MinRange, ApodConstants.DateFormat, null)"
                 MaxDate="DateTimeOffset.Now"
                 @bind-StartDate="startDate"

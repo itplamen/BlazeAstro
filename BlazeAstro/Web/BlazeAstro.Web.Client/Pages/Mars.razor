@@ -28,6 +28,7 @@
         <div class="form-floating">
             <DateRangePicker class="form-control" id="EarthDate"
                 SingleDatePicker="true"
+                DateFormat="@MarsConstants.DateFormat"
                 MinDate="DateTimeOffset.ParseExact(MarsConstants.Rovers[selected].LandingDate.ToString(MarsConstants.DateFormat), MarsConstants.DateFormat, null)"
                 MaxDate="DateTimeOffset.ParseExact(MarsConstants.Rovers[selected].LastDate.ToString(MarsConstants.DateFormat), MarsConstants.DateFormat, null)"
                 OnRangeSelect="OnEarthDateSelect" 
