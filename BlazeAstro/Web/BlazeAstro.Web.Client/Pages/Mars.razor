@@ -58,22 +58,24 @@
 
             var img = @outputModel.Photos[i];
             
-            <ImageComponent 
+            <Image 
                 Url="@img.ImgUrl" 
                 Title="@($"{img.Rover.Name} - {img.Id}")" 
                 Text="@($"{img.EarthDate} (Sol: {img.Sol}")" 
                 Explanation="@($"{img.Camera.FullName} ({img.Camera.Id} - {img.Camera.Name})")" 
-                OnClick="() => OnShowMoreInfo(img.Id)">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card">
-                            <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
-                        </div>
-                    </div>
-            </ImageComponent>
+                OnClick="() => OnShowMoreInfo(img.Id)" />
         }
+
+        <Modal>
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
+                </div>
+            </div>
+        </Modal>
     </div>
 
     if (outputModel.Photos.Length > MarsConstants.ItemsPerPage && outputModel.Photos.Length - 1 > lastImgIndex)

@@ -19,17 +19,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            @ChildContent
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @code {
     [Parameter]
     public string Url { get; set; }
@@ -45,7 +34,4 @@
 
     [Parameter]
     public EventCallback OnClick { get; set; }
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
 }

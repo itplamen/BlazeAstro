@@ -40,8 +40,16 @@
     <div class="row">
         @foreach (var apod in images)
         {
-            <ImageComponent Url="@apod.Url" Title="@apod.Title" Text="@apod.Date" Explanation="@apod.Explanation" OnClick="() => OnShowMoreInfo(apod.Date)">
-                <div class="modal-header">
+            <Image 
+                Url="@apod.Url" 
+                Title="@apod.Title" 
+                Text="@apod.Date" 
+                Explanation="@apod.Explanation" 
+                OnClick="() => OnShowMoreInfo(apod.Date)" />
+        }
+
+        <Modal>
+            <div class="modal-header">
                     <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
                 </div>
                 <div class="modal-body">
@@ -62,8 +70,7 @@
                         </div>
                     </div>
                 </div>
-            </ImageComponent>
-        }
+        </Modal>
     </div>
 }
 
