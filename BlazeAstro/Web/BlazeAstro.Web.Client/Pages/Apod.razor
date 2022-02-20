@@ -1,6 +1,6 @@
 ﻿@page "/apod"
 
-@inject HttpClient HttpClient 
+@inject IApiClient ApiClient 
 
 <h3>NASA Astronomy Picture of the Day (APOD)</h3>
 <p>Each day a different image or photograph of our universe is featured, along with a brief explanation written by a professional astronomer</p>
@@ -50,26 +50,26 @@
 
         <Modal>
             <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <img src="@image?.Url" class="card-img-top" alt="Apod Img">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    <span class="oi oi-calendar"></span>
-                                    @image?.Date
-                                </small>
-                                <small class="text-muted">
-                                    <span class="oi oi-person"></span>
-                                    @(image?.Copyright ?? "NASA")
-                                </small>
-                            </p>
-                            <p class="card-text">@image?.Explanation</p>
-                        </div>
+                <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img src="@image?.Url" class="card-img-top" alt="Apod Img">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <span class="oi oi-calendar"></span>
+                                @image?.Date
+                            </small>
+                            <small class="text-muted">
+                                <span class="oi oi-person"></span>
+                                @(image?.Copyright ?? "NASA")
+                            </small>
+                        </p>
+                        <p class="card-text">@image?.Explanation</p>
                     </div>
                 </div>
+            </div>
         </Modal>
     </div>
 }
@@ -84,7 +84,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>(
+        images = await ApiClient.Get<IEnumerable<ApodOutputModel>>(
             $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
     }
 
@@ -99,7 +99,7 @@
             urlParam = $"startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}";
         }
 
-        images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?{urlParam}");
+        images = await ApiClient.Get<IEnumerable<ApodOutputModel>>($"api/apod?{urlParam}");
 
         StateHasChanged();
     }
@@ -109,7 +109,7 @@
         if (e.Value.ToString() != randomNumbers.First())
         {
             selected = e.Value.ToString();
-            images = await HttpClient.GetFromJsonAsync<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");
+            images = await ApiClient.Get<IEnumerable<ApodOutputModel>>($"api/apod?count={e.Value}");
 
             StateHasChanged();
         }

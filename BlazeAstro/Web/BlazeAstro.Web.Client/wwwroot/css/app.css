@@ -63,6 +63,26 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+#Loader {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    opacity: 0.7;
+    background-color: #fff;
+    z-index: 99;
+    text-align: center;
+}
+
+#LoaderImg {
+    width: 20%;
+    height: 100%;
+}
+
 .country-flag {
     display: inline;
 }

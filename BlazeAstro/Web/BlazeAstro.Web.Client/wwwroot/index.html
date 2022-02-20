@@ -11,6 +11,9 @@
     <link href="BlazeAstro.Web.Client.styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="_content/BlazorDateRangePicker/daterangepicker.min.css" />
     <script src="_content/BlazorDateRangePicker/clickAndPositionHandler.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 
@@ -22,7 +25,19 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <div id="Loader">
+        <img id="LoaderImg" src="images/Loader.svg" alt="Loading..." />
+    </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        function showLoader() {
+            $('#Loader').show();
+        }
+
+        function hideLoader() {
+            setTimeout(function () { $('#Loader').hide()}, 1500);
+        }
+    </script>
 </body>
 
 </html>
