@@ -1,6 +1,6 @@
 ﻿@page "/astronauts"
 
-@inject HttpClient HttpClient 
+@inject IApiClient ApiClient 
 
 <h3>Astronauts in Space</h3>
 <p>The number of people in space at this moment @(outputModel != null ? $" is {outputModel.Number} " : "")</p>
@@ -53,7 +53,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await HttpClient.GetFromJsonAsync<AstronautsOutputModel>("api/astronauts");
+        outputModel = await ApiClient.Get<AstronautsOutputModel>("api/astronauts");
     }
-
 }

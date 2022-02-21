@@ -1,6 +1,6 @@
 ﻿@page "/mars"
 
-@inject HttpClient HttpClient
+@inject IApiClient ApiClient 
 
 <h3>Mars Rover Photos</h3>
 <p>Gallery that includes artwork, graphics, raw images, launch and landing images</p>
@@ -99,8 +99,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>
-            ($"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-3).ToString(MarsConstants.DateFormat)}");
+        outputModel = await ApiClient.Get<MarsOutputModel>(
+            $"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-3).ToString(MarsConstants.DateFormat)}");
 
         if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
         {
@@ -138,7 +138,7 @@
             urlParam += $"EarthDate={earthDate.Value.ToString(MarsConstants.DateFormat)}";
         }
 
-        outputModel = await HttpClient.GetFromJsonAsync<MarsOutputModel>($"api/mars?{urlParam}");
+        outputModel = await ApiClient.Get<MarsOutputModel>($"api/mars?{urlParam}");
 
         if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
         {

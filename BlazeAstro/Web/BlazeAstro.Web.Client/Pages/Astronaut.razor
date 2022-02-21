@@ -1,6 +1,6 @@
 ﻿@page "/astronauts/{name}"
 
-@inject HttpClient HttpClient 
+@inject IApiClient ApiClient 
 
 @if(outputModel != null)
 {
@@ -30,6 +30,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await HttpClient.GetFromJsonAsync<AstronautInfoOutputModel>($"api/astronauts/{Name}");
+        outputModel = await ApiClient.Get<AstronautInfoOutputModel>($"api/astronauts/{Name}");
     }
 }
