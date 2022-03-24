@@ -2,34 +2,41 @@
 
 @inject IApiClient ApiClient 
 
-@if(outputModel != null)
+@if(astronaut != null)
 {
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="@outputModel.ImgUrl" class="img-fluid rounded-start" alt="@Name">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h2 class="card-title">@Name.Replace("-", " ")</h2>
-                    <p class="card-text"><small>Date of birth: @outputModel.DateOfBirth</small></p>
-                    <p class="card-text">@outputModel.AstronautInfo</p>
-                    <h5>@outputModel.SpaceAgencyName</h5>
-                    <p class="card-text">@outputModel.SpaceAgencyInfo</p>
+    if(astronaut.Data != null)
+    {   
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="@astronaut.Data.ImgUrl" class="img-fluid rounded-start" alt="@Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">@Name.Replace("-", " ")</h2>
+                        <p class="card-text"><small>Date of birth: @astronaut.Data.DateOfBirth</small></p>
+                        <p class="card-text">@astronaut.Data.AstronautInfo</p>
+                        <h5>@astronaut.Data.SpaceAgencyName</h5>
+                        <p class="card-text">@astronaut.Data.SpaceAgencyInfo</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <NoImagesConponent />
+    }
 }
 
 @code {
     [Parameter]
     public string Name { get; set; }
 
-    AstronautInfoOutputModel outputModel;
+    ApiResponse<AstronautInfoOutputModel> astronaut;
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await ApiClient.Get<AstronautInfoOutputModel>($"api/astronauts/{Name}");
+        astronaut = await ApiClient.Get<AstronautInfoOutputModel>($"api/astronauts/{Name}");
     }
 }

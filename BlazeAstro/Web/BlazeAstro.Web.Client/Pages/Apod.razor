@@ -37,47 +37,54 @@
 
 @if (images != null)
 {
-    <div class="row">
-        @foreach (var apod in images)
-        {
-            <Image 
-                Url="@apod.Url" 
-                Title="@apod.Title" 
-                Text="@apod.Date" 
-                Explanation="@apod.Explanation" 
-                OnClick="() => OnShowMoreInfo(apod.Date)" />
-        }
+    if (images.Data != null)
+    {
+        <div class="row">
+            @foreach (var apod in images.Data)
+            {
+                <Image 
+                    Url="@apod.Url" 
+                    Title="@apod.Title" 
+                    Text="@apod.Date" 
+                    Explanation="@apod.Explanation" 
+                    OnClick="() => OnShowMoreInfo(apod.Date)" />
+            }
 
-        <Modal>
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <img src="@image?.Url" class="card-img-top" alt="Apod Img">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <small class="text-muted">
-                                <span class="oi oi-calendar"></span>
-                                @image?.Date
-                            </small>
-                            <small class="text-muted">
-                                <span class="oi oi-person"></span>
-                                @(image?.Copyright ?? "NASA")
-                            </small>
-                        </p>
-                        <p class="card-text">@image?.Explanation</p>
+            <Modal>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">@image?.Title</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <img src="@image?.Url" class="card-img-top" alt="Apod Img">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <span class="oi oi-calendar"></span>
+                                    @image?.Date
+                                </small>
+                                <small class="text-muted">
+                                    <span class="oi oi-person"></span>
+                                    @(image?.Copyright ?? "NASA")
+                                </small>
+                            </p>
+                            <p class="card-text">@image?.Explanation</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Modal>
-    </div>
+            </Modal>
+        </div>
+    }
+    else
+    {
+        <NoImagesConponent />
+    }
 }
 
 @code {
     string selected;
     ApodOutputModel image;
-    IEnumerable<ApodOutputModel> images;
+    ApiResponse<IEnumerable<ApodOutputModel>> images;
     DateTimeOffset? startDate = DateTime.Today.AddDays(-6);
     DateTimeOffset? endDate = DateTime.Today.AddDays(-1);
     IEnumerable<string> randomNumbers = new List<string>() { "None", "10", "25", "50", "100" };
@@ -86,6 +93,8 @@
     {
         images = await ApiClient.Get<IEnumerable<ApodOutputModel>>(
             $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
+
+        Console.WriteLine(images.ErrorMessage);
     }
 
     private async void OnRangeSelect(DateRange range)
@@ -117,6 +126,6 @@
 
     private void OnShowMoreInfo(string date)
     {
-        image = images.FirstOrDefault(x => x.Date == date);
+        image = images.Data.FirstOrDefault(x => x.Date == date);
     }
 }

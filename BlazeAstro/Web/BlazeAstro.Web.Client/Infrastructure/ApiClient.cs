@@ -4,6 +4,8 @@
 
     using Microsoft.JSInterop;
 
+    using BlazeAstro.Web.Shared.Models.Api;
+
     public class ApiClient : IApiClient
     {
         private readonly IJSRuntime jsRuntime;
@@ -15,17 +17,26 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<TResponse>Get<TResponse>(string url)
-            where TResponse : class
-
+        public async Task<ApiResponse<TOutput>>Get<TOutput>(string url)
+            where TOutput : class
         {
-            await jsRuntime.InvokeVoidAsync("showLoader");
+            try
+            {
+                await jsRuntime.InvokeVoidAsync("showLoader");
 
-            var response = await httpClient.GetFromJsonAsync<TResponse>(url);
+                var output = await httpClient.GetFromJsonAsync<TOutput>(url);
+                var response = new ApiResponse<TOutput>() { Data = output };
 
-            await jsRuntime.InvokeVoidAsync("hideLoader");
+                await jsRuntime.InvokeVoidAsync("hideLoader");
 
-            return response;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                await jsRuntime.InvokeVoidAsync("hideLoader");
+
+                return new ApiResponse<TOutput>() { ErrorMessage = "Could not retrieve data. Please try again" };
+            }
         }
     }
 }

@@ -3,56 +3,63 @@
 @inject IApiClient ApiClient 
 
 <h3>Astronauts in Space</h3>
-<p>The number of people in space at this moment @(outputModel != null ? $" is {outputModel.Number} " : "")</p>
+<p>The number of people in space at this moment @(astronauts != null && astronauts.Data != null ? $" is {astronauts.Data.Number} " : "")</p>
 
-@if (outputModel != null)
+@if (astronauts != null)
 {
-    <div class="row">
-        @foreach (var astronaut in outputModel.Astronauts)
-        { 
-            <div class="col-3">
-                <div class="card mb-3 astronauts">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="profile-img">
-                                <img src="@astronaut.ImgUrl" class="img-fluid rounded-start"  alt="Astronaut Image" />
+    if (astronauts.Data != null)
+    {
+         <div class="row">
+            @foreach (var astronaut in astronauts.Data.Astronauts)
+            { 
+                <div class="col-3">
+                    <div class="card mb-3 astronauts">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img src="@astronaut.ImgUrl" class="img-fluid rounded-start"  alt="Astronaut Image" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">@astronaut.Name.Replace("-", " ")</h5>
-                                <img class="country-flag" src="@astronaut.CountryFlagUrl" width="35" height="17" alt="@astronaut.Country" />
-                                <h6 class="card-text title">@astronaut.Title</h6>
-                                <p class="card-text location">@astronaut.Location</p>
-                                <p class="card-text biography"><small>@astronaut.Biography</small></p>
-                                <a href="/astronauts/@astronaut.Name" class="btn btn-light biolink">More Info</a>
-                                @if (!string.IsNullOrEmpty(astronaut.Wikipedia))
-                                {
-                                    <a href="@astronaut.Wikipedia" class="btn btn-light biolink" target="_blank">
-                                        <img src="/images/Wikipedia.png" class="biolink-logo" />
-                                    </a>
-                                }
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">@astronaut.Name.Replace("-", " ")</h5>
+                                    <img class="country-flag" src="@astronaut.CountryFlagUrl" width="35" height="17" alt="@astronaut.Country" />
+                                    <h6 class="card-text title">@astronaut.Title</h6>
+                                    <p class="card-text location">@astronaut.Location</p>
+                                    <p class="card-text biography"><small>@astronaut.Biography</small></p>
+                                    <a href="/astronauts/@astronaut.Name" class="btn btn-light biolink">More Info</a>
+                                    @if (!string.IsNullOrEmpty(astronaut.Wikipedia))
+                                    {
+                                        <a href="@astronaut.Wikipedia" class="btn btn-light biolink" target="_blank">
+                                            <img src="/images/Wikipedia.png" class="biolink-logo" />
+                                        </a>
+                                    }
                                 
-                                @if (!string.IsNullOrEmpty(astronaut.Twitter))
-                                {
-                                    <a href="@astronaut.Twitter" class="btn btn-light biolink" target="_blank">
-                                        <img src="/images/Twitter.png" class="biolink-logo" />
-                                    </a>
-                                }
+                                    @if (!string.IsNullOrEmpty(astronaut.Twitter))
+                                    {
+                                        <a href="@astronaut.Twitter" class="btn btn-light biolink" target="_blank">
+                                            <img src="/images/Twitter.png" class="biolink-logo" />
+                                        </a>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    }
+    else
+    {
+        <NoImagesConponent />
+    }
 }
 
 @code {
-    AstronautsOutputModel outputModel;
+    ApiResponse<AstronautsOutputModel> astronauts;
 
     protected override async Task OnInitializedAsync()
     {
-        outputModel = await ApiClient.Get<AstronautsOutputModel>("api/astronauts");
+        astronauts = await ApiClient.Get<AstronautsOutputModel>("api/astronauts");
     }
 }

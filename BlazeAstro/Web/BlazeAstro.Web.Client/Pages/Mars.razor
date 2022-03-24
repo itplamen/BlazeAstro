@@ -48,43 +48,50 @@
 
 @if (outputModel != null)
 {
-    <div class="row">
-        @for (int i = 0; i < outputModel.Photos.Length; i++)
-        {
-            if (i > lastImgIndex)
-            {
-                break;
-            }
-
-            var img = @outputModel.Photos[i];
-            
-            <Image 
-                Url="@img.ImgUrl" 
-                Title="@($"{img.Rover.Name} - {img.Id}")" 
-                Text="@($"{img.EarthDate} (Sol: {img.Sol}")" 
-                Explanation="@($"{img.Camera.FullName} ({img.Camera.Id} - {img.Camera.Name})")" 
-                OnClick="() => OnShowMoreInfo(img.Id)" />
-        }
-
-        <Modal>
-            <div class="modal-header">
-                <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
-                </div>
-            </div>
-        </Modal>
-    </div>
-
-    if (outputModel.Photos.Length > MarsConstants.ItemsPerPage && outputModel.Photos.Length - 1 > lastImgIndex)
+    if (outputModel.Data != null)
     {
         <div class="row">
-            <div class="col text-center">
-                <button type="button" class="btn btn-success" id="ShowMoreBtn" @onclick="@OnShowMoreImages">Show More</button>
-            </div>
+            @for (int i = 0; i < outputModel.Data.Photos.Length; i++)
+            {
+                if (i > lastImgIndex)
+                {
+                    break;
+                }
+
+                var img = @outputModel.Data.Photos[i];
+            
+                <Image 
+                    Url="@img.ImgUrl" 
+                    Title="@($"{img.Rover.Name} - {img.Id}")" 
+                    Text="@($"{img.EarthDate} (Sol: {img.Sol}")" 
+                    Explanation="@($"{img.Camera.FullName} ({img.Camera.Id} - {img.Camera.Name})")" 
+                    OnClick="() => OnShowMoreInfo(img.Id)" />
+            }
+
+            <Modal>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">@photo?.Rover?.Name - @photo?.Id</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <img src="@photo?.ImgUrl" class="card-img-top" alt="@(photo?.Rover?.Name + " Img")">
+                    </div>
+                </div>
+            </Modal>
         </div>
+
+        if (outputModel.Data.Photos.Length > MarsConstants.ItemsPerPage && outputModel.Data.Photos.Length - 1 > lastImgIndex)
+        {
+            <div class="row">
+                <div class="col text-center">
+                    <button type="button" class="btn btn-success" id="ShowMoreBtn" @onclick="@OnShowMoreImages">Show More</button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <NoImagesConponent />
     }
 }
 
@@ -92,7 +99,7 @@
     int sol;
     int lastImgIndex;
     PhotoOutputModel photo;
-    MarsOutputModel outputModel;
+    ApiResponse<MarsOutputModel> outputModel;
     DateTimeOffset? earthDate = MarsConstants.Rovers.First().Value.LandingDate;
     RoverName selected = MarsConstants.Rovers.Keys.First();
     string minDateRange = MarsConstants.Rovers.First().Value.LandingDate.ToString(MarsConstants.DateFormat);
@@ -102,7 +109,7 @@
         outputModel = await ApiClient.Get<MarsOutputModel>(
             $"api/mars?RoverName={RoverName.Perseverance.ToString()}&EarthDate={DateTime.Now.AddDays(-3).ToString(MarsConstants.DateFormat)}");
 
-        if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
+        if (outputModel.Data.Photos.Count() > MarsConstants.ItemsPerPage)
         {
             lastImgIndex = MarsConstants.ItemsPerPage - 1;
         }
@@ -140,7 +147,7 @@
 
         outputModel = await ApiClient.Get<MarsOutputModel>($"api/mars?{urlParam}");
 
-        if (outputModel.Photos.Count() > MarsConstants.ItemsPerPage)
+        if (outputModel.Data.Photos.Count() > MarsConstants.ItemsPerPage)
         {
             lastImgIndex = MarsConstants.ItemsPerPage - 1;
         }
@@ -150,7 +157,7 @@
 
     private void OnShowMoreInfo(int photoId)
     {
-        photo = outputModel.Photos.FirstOrDefault(x => x.Id == photoId);
+        photo = outputModel.Data.Photos.FirstOrDefault(x => x.Id == photoId);
     }
 
     private void OnShowMoreImages()

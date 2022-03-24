@@ -4,6 +4,8 @@ using AngleSharp.Html.Parser;
 
 using Microsoft.Extensions.Caching.Distributed;
 
+using Newtonsoft.Json;
+
 using BlazeAstro.Infrastructure.Mapping;
 using BlazeAstro.Services.DataProviders;
 using BlazeAstro.Services.DataProviders.Contracts;
@@ -11,8 +13,9 @@ using BlazeAstro.Services.Models.Apod;
 using BlazeAstro.Services.Models.Astronauts.AstronautInfo;
 using BlazeAstro.Services.Models.Astronauts.AstronautsInSpace;
 using BlazeAstro.Services.Models.MarsPhotos;
-using BlazeAstro.Web.Shared.Models.Mars;
+using BlazeAstro.Web.Shared.Models.Api;
 using BlazeAstro.Web.Shared.Models.Apod;
+using BlazeAstro.Web.Shared.Models.Mars;
 using BlazeAstro.Web.Shared.Validations.Apod;
 using BlazeAstro.Web.Shared.Validations.Contracts;
 using BlazeAstro.Web.Shared.Validations.Mars;
@@ -79,9 +82,17 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseExceptionHandler(exceptionHandlerApp =>
+    {
+        exceptionHandlerApp.Run(async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync(JsonConvert.SerializeObject(new ApiResponse() { ErrorMessage = "Could not retrieve data. Please try again" }));
+        });
+    });
+
 }
 
 app.UseHttpsRedirection();

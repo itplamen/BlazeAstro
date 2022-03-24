@@ -1,8 +1,10 @@
 ﻿namespace BlazeAstro.Web.Client.Infrastructure
 {
+    using BlazeAstro.Web.Shared.Models.Api;
+
     public interface IApiClient
     {
-        Task<TResponse> Get<TResponse>(string url)
-            where TResponse : class;
+        Task<ApiResponse<TOutput>> Get<TOutput>(string url)
+            where TOutput : class;
     }
 }
