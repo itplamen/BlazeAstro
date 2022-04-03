@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Infrastructure.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Shared", "Web\BlazeAstro.Web.Shared\BlazeAstro.Web.Shared.csproj", "{6441DBA2-379F-4C17-9682-D39A176A29B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Services.Cache", "Services\BlazeAstro.Services.Cache\BlazeAstro.Services.Cache.csproj", "{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{6441DBA2-379F-4C17-9682-D39A176A29B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6441DBA2-379F-4C17-9682-D39A176A29B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6441DBA2-379F-4C17-9682-D39A176A29B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{DA064CDD-0BDC-4C1A-890D-87CB44B46AB6} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 		{39240035-BA42-4243-984F-51CB72DCBBD0} = {CF4A2F03-E37E-4F2A-96A5-EC5FC2EBE547}
 		{6441DBA2-379F-4C17-9682-D39A176A29B7} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
+		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF} = {B0EED960-CDF9-464B-9936-DD3AF3B89936}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF6853F-9693-42A4-AB37-6094E3D6C73C}
