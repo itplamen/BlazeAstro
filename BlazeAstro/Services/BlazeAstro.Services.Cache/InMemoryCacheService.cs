@@ -1,11 +1,11 @@
 ﻿namespace BlazeAstro.Services.Cache
 {
     using System;
+    using System.Threading.Tasks;
 
     using Microsoft.Extensions.Caching.Memory;
 
     using BlazeAstro.Services.Cache.Contracts;
-    using System.Threading.Tasks;
 
     public class InMemoryCacheService<TValue> : ICacheService<TValue>
         where TValue : class
@@ -13,11 +13,11 @@
         private readonly IMemoryCache memoryCache;
         private readonly MemoryCacheEntryOptions options;
 
-        public InMemoryCacheService(IMemoryCache memoryCache)
+        public InMemoryCacheService(IMemoryCache memoryCache, int expiration)
         {
             this.memoryCache = memoryCache;
             this.options = new MemoryCacheEntryOptions();
-            options.AbsoluteExpiration = DateTimeOffset.Now.AddDays(1);
+            options.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(expiration);
         }
 
         public Task Set(string key, TValue value)

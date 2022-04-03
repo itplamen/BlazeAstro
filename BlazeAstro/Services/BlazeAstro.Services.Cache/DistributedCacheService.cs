@@ -15,16 +15,17 @@
         private readonly IDistributedCache cache;
         private readonly DistributedCacheEntryOptions options;
 
-        public DistributedCacheService(IDistributedCache cache)
+        public DistributedCacheService(IDistributedCache cache, int expiration)
         {
             this.cache = cache;
             this.options = new DistributedCacheEntryOptions();
-            options.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
+            options.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(expiration);
         }
 
         public async Task Set(string key, TValue value)
         {
             var cacheData = JsonConvert.SerializeObject(value);
+
             await cache.SetStringAsync(key, cacheData, options);
         }
 
