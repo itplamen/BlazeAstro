@@ -3,7 +3,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using BlazeAstro.Infrastructure.IoCContainer.Contracts;
-    using BlazeAstro.Infrastructure.IoCContainer.Packages;
+    using BlazeAstro.Infrastructure.IoCContainer.IoCPackages;
     using Microsoft.Extensions.Configuration;
 
     public static class IoCContainer
