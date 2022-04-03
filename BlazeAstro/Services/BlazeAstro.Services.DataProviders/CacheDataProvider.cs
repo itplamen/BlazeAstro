@@ -1,12 +1,8 @@
 ﻿namespace BlazeAstro.Services.DataProviders
 {
-    using System;
     using System.Threading.Tasks;
 
-    using Microsoft.Extensions.Caching.Distributed;
-
-    using Newtonsoft.Json;
-
+    using BlazeAstro.Services.Cache.Contracts;
     using BlazeAstro.Services.DataProviders.Contracts;
     using BlazeAstro.Services.Models.Contracts;
 
@@ -14,35 +10,28 @@
         where TRequest : IRequest
         where TResponse : class
     {
-        private readonly IDistributedCache cache;
-        private readonly DistributedCacheEntryOptions options;
+        private readonly ICacheService<TResponse> cacheService;
         private readonly IDataProvider<TRequest, TResponse> decorated;
 
-        public CacheDataProvider(IDistributedCache cache, IDataProvider<TRequest, TResponse> decorated)
+        public CacheDataProvider(ICacheService<TResponse> cacheService, IDataProvider<TRequest, TResponse> decorated)
         {
-            this.cache = cache;
+            this.cacheService = cacheService;
             this.decorated = decorated;
-            this.options = new DistributedCacheEntryOptions();
-            options.AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1);
         }
 
         public async Task<TResponse> GetData(TRequest request)
         {
-            var json = await cache.GetStringAsync(request.CacheKey);
+            var cacheData = await cacheService.Get(request.CacheKey);
 
-            if (string.IsNullOrEmpty(json))
+            if (cacheData == null)
             {
                 var response = await decorated.GetData(request);
-
-                var cacheData = JsonConvert.SerializeObject(response);
-                await cache.SetStringAsync(request.CacheKey, cacheData, options);
+                await cacheService.Set(request.CacheKey, response);
 
                 return response;
             }
 
-            var cachedData = JsonConvert.DeserializeObject<TResponse>(json);
-
-            return cachedData;
+            return cacheData;
         }
     }
 }
