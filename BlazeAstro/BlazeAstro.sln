@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Infrastructure.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Shared", "Web\BlazeAstro.Web.Shared\BlazeAstro.Web.Shared.csproj", "{6441DBA2-379F-4C17-9682-D39A176A29B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Services.Cache", "Services\BlazeAstro.Services.Cache\BlazeAstro.Services.Cache.csproj", "{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Services.Cache", "Services\BlazeAstro.Services.Cache\BlazeAstro.Services.Cache.csproj", "{281CDDB9-AC12-4CD2-AC45-9D614066C2DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Infrastructure.IoCContainer", "Infrastructure\BlazeAstro.Infrastructure.IoCContainer\BlazeAstro.Infrastructure.IoCContainer.csproj", "{E196878D-BF9C-4A4D-A2E6-E512C896F693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Infrastructure.IoCContainer", "Infrastructure\BlazeAstro.Infrastructure.IoCContainer\BlazeAstro.Infrastructure.IoCContainer.csproj", "{E196878D-BF9C-4A4D-A2E6-E512C896F693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Web.Functions", "Web\BlazeAstro.Web.Functions\BlazeAstro.Web.Functions.csproj", "{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{E196878D-BF9C-4A4D-A2E6-E512C896F693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E196878D-BF9C-4A4D-A2E6-E512C896F693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E196878D-BF9C-4A4D-A2E6-E512C896F693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{6441DBA2-379F-4C17-9682-D39A176A29B7} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 		{281CDDB9-AC12-4CD2-AC45-9D614066C2DF} = {B0EED960-CDF9-464B-9936-DD3AF3B89936}
 		{E196878D-BF9C-4A4D-A2E6-E512C896F693} = {CF4A2F03-E37E-4F2A-96A5-EC5FC2EBE547}
+		{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD} = {B597C30B-AC8A-463E-95AF-CA7B8EDA1C10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5BF6853F-9693-42A4-AB37-6094E3D6C73C}
