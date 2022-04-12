@@ -4,7 +4,15 @@
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\BlazeAstro.Infrastructure.IoCContainer\BlazeAstro.Infrastructure.IoCContainer.csproj" />
+    <ProjectReference Include="..\..\Services\BlazeAstro.Services.DataProviders\BlazeAstro.Services.DataProviders.csproj" />
+    <ProjectReference Include="..\..\Services\BlazeAstro.Services.Models\BlazeAstro.Services.Models.csproj" />
+    <ProjectReference Include="..\BlazeAstro.Web.Shared\BlazeAstro.Web.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

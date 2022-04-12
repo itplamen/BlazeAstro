@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "APOD_URL": "https://api.nasa.gov/planetary/apod",
+    "MARS_URL": "https://api.nasa.gov/mars-photos/api/v1/rovers/",
+    "ASTRONAUTS_IN_SPACE": "https://www.howmanypeopleareinspacerightnow.com/peopleinspace.json",
+    "ASTRONAUTS_INFO": "https://www.spacelaunchschedule.com/astronaut/",
+    "NASA_API_KEY": "YOUR_API_KEY_HERE"
+  },
+  "Host": {
+    "CORS": "*"
+  }
+}
