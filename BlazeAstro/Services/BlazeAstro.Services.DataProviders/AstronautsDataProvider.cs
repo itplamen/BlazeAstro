@@ -18,9 +18,9 @@
     public class AstronautsDataProvider : IDataProvider<AstronautsRequestModel, AstronautsResponseModel>, IDataProvider<AstronautInfoRequestModel, AstronautInfoResponseModel>
     {
         private readonly HttpClient httpClient;
-        private readonly IHtmlParser htmlParser;
+        private readonly HtmlParser htmlParser;
 
-        public AstronautsDataProvider(HttpClient httpClient, IHtmlParser htmlParser)
+        public AstronautsDataProvider(HttpClient httpClient, HtmlParser htmlParser)
         {
             this.httpClient = httpClient;
             this.htmlParser = htmlParser;

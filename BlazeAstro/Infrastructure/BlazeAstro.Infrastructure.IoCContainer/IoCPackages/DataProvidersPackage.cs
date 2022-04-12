@@ -22,7 +22,7 @@
         public void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton(new HttpClient());
-            services.AddSingleton<IHtmlParser, HtmlParser>();
+            services.AddSingleton(new HtmlParser());
 
             services.AddTransient<ApodDataProvider>();
             services.AddTransient<AstronautsDataProvider>();

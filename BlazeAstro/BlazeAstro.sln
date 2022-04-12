@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Services.Cache",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Infrastructure.IoCContainer", "Infrastructure\BlazeAstro.Infrastructure.IoCContainer\BlazeAstro.Infrastructure.IoCContainer.csproj", "{E196878D-BF9C-4A4D-A2E6-E512C896F693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazeAstro.Web.Functions", "Web\BlazeAstro.Web.Functions\BlazeAstro.Web.Functions.csproj", "{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazeAstro.Web.Functions", "Web\BlazeAstro.Web.Functions\BlazeAstro.Web.Functions.csproj", "{B153BDDC-5BDA-48E2-926A-8065A6FBC9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
