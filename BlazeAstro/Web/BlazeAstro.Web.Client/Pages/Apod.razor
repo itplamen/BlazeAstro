@@ -92,7 +92,7 @@
     protected override async Task OnInitializedAsync()
     {
         images = await ApiClient.Get<IEnumerable<ApodOutputModel>>(
-            $"api/apod?startDate={startDate.Value.Date.ToShortDateString()}&endDate={endDate.Value.Date.ToShortDateString()}");
+            $"api/apod?startDate={startDate.Value.Date.ToString(ApodConstants.DateFormat)}&endDate={endDate.Value.Date.ToString(ApodConstants.DateFormat)}");
 
         Console.WriteLine(images.ErrorMessage);
     }
@@ -101,11 +101,11 @@
     {
         selected = randomNumbers.First();
 
-        string urlParam = $"date={range.Start.Date.ToShortDateString()}";
+        string urlParam = $"date={range.Start.Date.ToString(ApodConstants.DateFormat)}";
 
         if (range.Start.Date != range.End.Date)
         {
-            urlParam = $"startDate={range.Start.Date.ToShortDateString()}&endDate={range.End.Date.ToShortDateString()}";
+            urlParam = $"startDate={range.Start.Date.ToString(ApodConstants.DateFormat)}&endDate={range.End.Date.ToString(ApodConstants.DateFormat)}";
         }
 
         images = await ApiClient.Get<IEnumerable<ApodOutputModel>>($"api/apod?{urlParam}");
