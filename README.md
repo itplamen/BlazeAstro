@@ -1,5 +1,7 @@
 # BlazeAstro
-Blazor WebAssembly with Azure Functions app for space exploration using NASA data https://witty-forest-0fb409703.1.azurestaticapps.net/
+Blazor WebAssembly with Azure Functions app for space exploration using NASA data 
+
+https://witty-forest-0fb409703.1.azurestaticapps.net/
 
 [![Azure Static Web Apps CI/CD](https://github.com/itplamen/BlazeAstro/actions/workflows/azure-static-web-apps-witty-forest-0fb409703.yml/badge.svg)](https://github.com/itplamen/testtest/actions/workflows/azure-static-web-apps-blue-water-0d6750303.yml)
 [![Build Status](https://dev.azure.com/itplamen/BlazeAstro/_apis/build/status/BlazeAstro-ASP.NET%20Core-CI?branchName=main)](https://dev.azure.com/itplamen/BlazeAstro/_build/latest?definitionId=3&branchName=main)
@@ -27,3 +29,10 @@ Blazor WebAssembly with Azure Functions app for space exploration using NASA dat
 "UseInMemoryCache": false
 docker run --name BlazeAstroDb -p5002:6379 -d redis
 ```
+
+## Screenshots
+![Screenshot](assets/Screenshot_1.png)
+
+![Screenshot](assets/Screenshot_2.png)
+
+![Alt Text](assets/Animation.gif)
