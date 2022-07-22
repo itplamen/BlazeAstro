@@ -3,7 +3,7 @@ Blazor WebAssembly with Azure Functions app for space exploration using NASA dat
 
 https://witty-forest-0fb409703.1.azurestaticapps.net/
 
-[![Azure Static Web Apps CI/CD](https://github.com/itplamen/BlazeAstro/actions/workflows/azure-static-web-apps-witty-forest-0fb409703.yml/badge.svg)](https://github.com/itplamen/testtest/actions/workflows/azure-static-web-apps-blue-water-0d6750303.yml)
+[![Azure Static Web Apps CI/CD](https://github.com/itplamen/BlazeAstro/actions/workflows/azure-static-web-apps-witty-forest-0fb409703.yml/badge.svg)](https://github.com/itplamen/BlazeAstro/blob/main/.github/workflows/azure-static-web-apps-witty-forest-0fb409703.yml)
 [![Build Status](https://dev.azure.com/itplamen/BlazeAstro/_apis/build/status/BlazeAstro-ASP.NET%20Core-CI?branchName=main)](https://dev.azure.com/itplamen/BlazeAstro/_build/latest?definitionId=3&branchName=main)
 [![Live](https://img.shields.io/website?label=Website&url=https://witty-forest-0fb409703.1.azurestaticapps.net//)](https://witty-forest-0fb409703.1.azurestaticapps.net//)
 
